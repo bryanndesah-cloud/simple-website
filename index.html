@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recipe App</title>
+    <style>
+        body { font-family: Arial; }
+        .recipe {
+            border: 1px solid #000;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+<h1>🍲 Food Recipes</h1>
+
+<h2>Add Recipe</h2>
+<form id="recipeForm">
+    <input type="text" id="title" placeholder="Recipe Title" required><br><br>
+    <textarea id="ingredients" placeholder="Ingredients" required></textarea><br><br>
+    <textarea id="instructions" placeholder="Instructions" required></textarea><br><br>
+    <button type="submit">Add Recipe</button>
+</form>
+
+<h2>All Recipes</h2>
+<div id="recipesList"></div>
+
+<script>
+    let recipes = [];
+
+    const form = document.getElementById("recipeForm");
+    const recipesList = document.getElementById("recipesList");
+
+    form.addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const title = document.getElementById("title").value;
+        const ingredients = document.getElementById("ingredients").value;
+        const instructions = document.getElementById("instructions").value;
+
+        const recipe = { title, ingredients, instructions };
+        recipes.push(recipe);
+
+        displayRecipes();
+
+        form.reset();
+    });
+
+    function displayRecipes() {
+        recipesList.innerHTML = "";
+
+        recipes.forEach(recipe => {
+            const div = document.createElement("div");
+            div.className = "recipe";
+
+            div.innerHTML = `
+                <h3>${recipe.title}</h3>
+                <strong>Ingredients:</strong>
+                <p>${recipe.ingredients}</p>
+                <strong>Instructions:</strong>
+                <p>${recipe.instructions}</p>
+            `;
+
+            recipesList.appendChild(div);
+        });
+    }
+</script>
+
+</body>
+</html>
