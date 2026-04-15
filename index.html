@@ -2,20 +2,29 @@
 <html lang="en">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>NDESANJO FAMILY RECEPIES</title>
+<title>NDESANJO FAMILY RECIPES</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-:root{--primary:#dc2626;--primary-light:#ef4444;--primary-glow:rgba(220,38,38,0.18);--accent:#b91c1c;--bg:#faf7f2;--bg-secondary:#f0ebe3;--card:#ffffff;--text:#1a1a1a;--text-muted:#6b7280;--border:rgba(0,0,0,0.06);--shadow:0 1px 3px rgba(0,0,0,0.04),0 4px 12px rgba(0,0,0,0.03);--shadow-lg:0 8px 30px rgba(0,0,0,0.08);--radius:16px;--story-gradient:conic-gradient(from 0deg,#dc2626,#ef4444,#b91c1c,#7f1d1d,#dc2626);--admin:#7c3aed;--admin-glow:rgba(124,58,237,0.15);--danger:#dc2626;}
+:root{--primary:#dc2626;--primary-light:#ef4444;--primary-glow:rgba(220,38,38,0.18);--accent:#b91c1c;--bg:#faf7f2;--bg-secondary:#f0ebe3;--card:#ffffff;--text:#1a1a1a;--text-muted:#6b7280;--border:rgba(0,0,0,0.06);--shadow:0 1px 3px rgba(0,0,0,0.04),0 4px 12px rgba(0,0,0,0.03);--shadow-lg:0 8px 30px rgba(0,0,0,0.08);--radius:16px;--story-gradient:conic-gradient(from 0deg,#dc2626,#ef4444,#b91c1c,#7f1d1d,#dc2626);--admin:#7c3aed;--admin-glow:rgba(124,58,237,0.15);--danger:#dc2626;--transition-smooth:0.35s cubic-bezier(.16,1,.3,1);}
 body.dark{--bg:#0a0a0a;--bg-secondary:#141414;--card:#1a1a1a;--text:#fafafa;--text-muted:#888;--border:rgba(255,255,255,0.06);--shadow:0 1px 3px rgba(0,0,0,0.2);--shadow-lg:0 8px 30px rgba(0,0,0,0.4);}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;min-height:-webkit-fill-available;transition:background .4s,color .4s;overflow-x:hidden;-webkit-tap-highlight-color:transparent;}
 body::before{content:'';position:fixed;inset:0;opacity:.015;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;}
 
+/* Reveal animations */
+@keyframes revealUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes revealScale{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+@keyframes revealLeft{from{opacity:0;transform:translateX(-20px)}to{opacity:1;transform:translateX(0)}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+.reveal-up{animation:revealUp .5s var(--transition-smooth) both;}
+.reveal-scale{animation:revealScale .45s var(--transition-smooth) both;}
+.reveal-left{animation:revealLeft .4s var(--transition-smooth) both;}
+
 /* AUTH */
 .auth-overlay{position:fixed;inset:0;z-index:1000;background:var(--bg);display:flex;align-items:center;justify-content:center;transition:opacity .4s;}
 .auth-overlay.hidden{opacity:0;pointer-events:none;}
-.auth-box{width:100%;max-width:380px;padding:40px 32px;text-align:center;}
+.auth-box{width:100%;max-width:380px;padding:40px 32px;text-align:center;animation:revealScale .6s var(--transition-smooth) both;}
 .auth-logo{font-family:'Playfair Display',serif;font-weight:700;font-style:italic;font-size:24px;margin-bottom:6px;display:flex;align-items:center;justify-content:center;gap:8px;}
 .auth-logo .logo-dot{width:8px;height:8px;border-radius:50%;background:var(--primary);animation:pulse-dot 2s ease infinite;}
 @keyframes pulse-dot{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.4);opacity:.6}}
@@ -23,18 +32,26 @@ body::before{content:'';position:fixed;inset:0;opacity:.015;background-image:url
 .auth-tabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:24px;}
 .auth-tab{flex:1;padding:10px 0;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);cursor:pointer;border:none;background:none;position:relative;transition:color .2s;font-family:'DM Sans',sans-serif;}
 .auth-tab.active{color:var(--primary);}
-.auth-tab.active::after{content:'';position:absolute;bottom:-1px;left:20%;right:20%;height:2px;background:var(--primary);border-radius:2px;}
-.auth-form{display:none;}
+.auth-tab.active::after{content:'';position:absolute;bottom:-1px;left:20%;right:20%;height:2px;background:var(--primary);border-radius:2px;transition:left .3s,right .3s;}
+.auth-form{display:none;animation:revealUp .3s var(--transition-smooth) both;}
 .auth-form.active{display:block;}
 .auth-field{margin-bottom:16px;text-align:left;}
 .auth-label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--text-muted);margin-bottom:5px;}
 .auth-input{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:var(--bg-secondary);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;transition:all .25s;-webkit-appearance:none;}
 .auth-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-glow);}
-.auth-error{font-size:12px;color:var(--accent);margin-bottom:12px;display:none;text-align:left;background:rgba(220,38,38,0.08);padding:8px 12px;border-radius:8px;}
+.auth-error{font-size:12px;color:var(--accent);margin-bottom:12px;display:none;text-align:left;background:rgba(220,38,38,0.08);padding:8px 12px;border-radius:8px;line-height:1.4;}
 .auth-error.show{display:block;}
-.auth-submit{width:100%;padding:13px;border:none;border-radius:12px;background:var(--primary);color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .25s;-webkit-tap-highlight-color:transparent;margin-top:8px;}
-.auth-submit:hover{background:var(--accent);transform:translateY(-1px);box-shadow:0 6px 20px var(--primary-glow);}
-.auth-submit:active{transform:scale(.98);}
+.auth-error i{margin-right:6px;}
+.auth-submit{width:100%;padding:13px;border:none;border-radius:12px;background:var(--primary);color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .25s;-webkit-tap-highlight-color:transparent;margin-top:8px;position:relative;overflow:hidden;}
+.auth-submit:hover:not(:disabled){background:var(--accent);transform:translateY(-1px);box-shadow:0 6px 20px var(--primary-glow);}
+.auth-submit:active:not(:disabled){transform:scale(.98);}
+.auth-submit:disabled{opacity:.65;cursor:not-allowed;}
+.auth-submit .btn-text{transition:opacity .2s;}
+.auth-submit.loading .btn-text{opacity:0;}
+.auth-submit .btn-spinner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s;}
+.auth-submit.loading .btn-spinner{opacity:1;}
+.auth-submit .btn-spinner::after{content:'';width:18px;height:18px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg)}}
 .auth-hint{font-size:11px;color:var(--text-muted);margin-top:16px;line-height:1.5;}
 .auth-hint a{color:var(--primary);font-weight:600;text-decoration:none;}
 
@@ -53,26 +70,67 @@ body.dark .topnav{background:rgba(10,10,10,.88);}
 .user-badge:hover{background:var(--primary-glow);color:var(--primary);}
 .user-badge i{font-size:13px;}
 .user-badge.admin-badge{background:var(--admin-glow);color:var(--admin);border:1px solid rgba(124,58,237,0.2);}
+.user-badge-avatar{width:20px;height:20px;border-radius:50%;object-fit:cover;border:1px solid var(--border);display:none;}
+.user-badge-avatar.visible{display:inline-block;}
+.user-badge .fa-user{display:inline;}
+.user-badge-avatar.visible+.fa-user,
+.user-badge.has-avatar .fa-user{display:none;}
 .nav-actions{display:flex;gap:5px;}
 .nav-btn{height:34px;border:none;border-radius:50%;background:var(--bg-secondary);color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;transition:all .2s;-webkit-tap-highlight-color:transparent;padding:0 10px;gap:5px;}
 .nav-btn:hover{background:var(--primary-glow);color:var(--primary);transform:scale(1.06);}
 .nav-btn:active{transform:scale(.94);}
 .nav-btn .lang-label{font-weight:700;font-size:11px;letter-spacing:.5px;}
 
+/* PROFILE PANEL */
+.profile-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:500;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);}
+.profile-backdrop.show{display:flex;animation:fadeIn .2s ease;}
+.profile-panel{background:var(--card);border-radius:20px;max-width:440px;width:100%;max-height:85vh;overflow-y:auto;animation:modalSlide .35s var(--transition-smooth);box-shadow:var(--shadow-lg);padding:0;}
+.profile-header-area{position:relative;padding:40px 24px 20px;text-align:center;background:linear-gradient(135deg,var(--primary-glow),transparent);}
+.profile-close{position:absolute;top:12px;right:12px;width:30px;height:30px;border:none;border-radius:50%;background:var(--bg-secondary);color:var(--text-muted);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:1;}
+.profile-close:hover{background:var(--border);color:var(--text);}
+.profile-avatar-wrap{position:relative;width:90px;height:90px;margin:0 auto 14px;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.profile-avatar-img{width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid var(--card);box-shadow:0 4px 16px rgba(0,0,0,.12);transition:transform .3s;}
+.profile-avatar-wrap:hover .profile-avatar-img{transform:scale(1.05);}
+.profile-avatar-placeholder{width:90px;height:90px;border-radius:50%;background:var(--primary-glow);display:flex;align-items:center;justify-content:center;font-size:36px;font-weight:700;color:var(--primary);border:3px solid var(--card);box-shadow:0 4px 16px rgba(0,0,0,.12);transition:transform .3s;}
+.profile-avatar-wrap:hover .profile-avatar-placeholder{transform:scale(1.05);}
+.profile-avatar-overlay{position:absolute;inset:0;border-radius:50%;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .25s;color:#fff;font-size:20px;}
+.profile-avatar-wrap:hover .profile-avatar-overlay{opacity:1;}
+.profile-username{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:2px;}
+.profile-bio{font-size:13px;color:var(--text-muted);line-height:1.5;margin-bottom:4px;max-width:300px;margin-left:auto;margin-right:auto;}
+.profile-joined{font-size:11px;color:var(--text-muted);opacity:.6;}
+.profile-stats{display:flex;justify-content:center;gap:32px;padding:16px 24px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.profile-stat{text-align:center;}
+.profile-stat-num{font-size:20px;font-weight:700;color:var(--text);}
+.profile-stat-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);margin-top:2px;}
+.profile-section{padding:16px 24px;}
+.profile-section-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:12px;}
+.profile-field{margin-bottom:12px;}
+.profile-field label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--text-muted);margin-bottom:5px;}
+.profile-field input,.profile-field textarea{width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:var(--bg-secondary);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;transition:all .25s;-webkit-appearance:none;}
+.profile-field textarea{resize:vertical;min-height:60px;line-height:1.5;}
+.profile-field input:focus,.profile-field textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-glow);}
+.profile-save-btn{width:100%;padding:11px;border:none;border-radius:12px;background:var(--primary);color:#fff;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .25s;letter-spacing:.3px;-webkit-tap-highlight-color:transparent;margin-top:4px;}
+.profile-save-btn:hover{background:var(--accent);transform:translateY(-1px);}
+.profile-save-btn:active{transform:scale(.98);}
+.profile-logout{width:100%;padding:11px;border:none;border-radius:12px;background:var(--bg-secondary);color:var(--accent);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .25s;margin-top:8px;-webkit-tap-highlight-color:transparent;}
+.profile-logout:hover{background:rgba(220,38,38,.1);}
+.profile-logout:active{transform:scale(.98);}
+
 /* ADMIN PANEL */
 .admin-panel-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:500;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);}
 .admin-panel-backdrop.show{display:flex;animation:fadeIn .2s ease;}
-.admin-panel{background:var(--card);border-radius:20px;max-width:440px;width:100%;max-height:80vh;overflow-y:auto;animation:modalSlide .35s cubic-bezier(.16,1,.3,1);box-shadow:var(--shadow-lg);padding:0;}
-.admin-header{padding:18px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--card);z-index:1;}
+.admin-panel{background:var(--card);border-radius:20px;max-width:440px;width:100%;max-height:80vh;overflow-y:auto;animation:modalSlide .35s var(--transition-smooth);box-shadow:var(--shadow-lg);padding:0;}
+.admin-header{padding:18px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--card);z-index:1;border-radius:20px 20px 0 0;}
 .admin-title{font-weight:700;font-size:15px;display:flex;align-items:center;gap:8px;color:var(--admin);}
-.admin-close{width:30px;height:30px;border:none;border-radius:50%;background:var(--bg-secondary);color:var(--text-muted);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;-webkit-tap-highlight-color:transparent;}
+.admin-close{width:30px;height:30px;border:none;border-radius:50%;background:var(--bg-secondary);color:var(--text-muted);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;}
 .admin-close:hover{background:var(--border);color:var(--text);}
 .admin-section{padding:16px 20px;}
 .admin-section-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--admin);margin-bottom:12px;display:flex;align-items:center;gap:6px;}
 .admin-section-title i{font-size:12px;}
 .admin-user-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);}
 .admin-user-row:last-child{border-bottom:none;}
-.admin-user-avatar{width:32px;height:32px;border-radius:50%;background:var(--primary-glow);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--primary);flex-shrink:0;}
+.admin-user-avatar{width:32px;height:32px;border-radius:50%;background:var(--primary-glow);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--primary);flex-shrink:0;overflow:hidden;}
+.admin-user-avatar img{width:100%;height:100%;object-fit:cover;}
 .admin-user-avatar.banned-avatar{background:rgba(220,38,38,0.12);color:var(--accent);}
 .admin-user-info{flex:1;min-width:0;}
 .admin-user-name{font-size:13px;font-weight:700;display:flex;align-items:center;gap:6px;}
@@ -80,10 +138,10 @@ body.dark .topnav{background:rgba(10,10,10,.88);}
 .admin-user-name .banned-tag{font-size:9px;background:var(--accent);color:#fff;padding:2px 6px;border-radius:4px;font-weight:700;}
 .admin-user-time{font-size:10px;color:var(--text-muted);opacity:.7;}
 .admin-user-actions{display:flex;gap:6px;}
-.admin-btn-sm{width:28px;height:28px;border:none;border-radius:8px;background:var(--bg-secondary);color:var(--text-muted);font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;-webkit-tap-highlight-color:transparent;}
+.admin-btn-sm{width:28px;height:28px;border:none;border-radius:8px;background:var(--bg-secondary);color:var(--text-muted);font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;}
 .admin-btn-sm.ban-btn:hover{background:rgba(220,38,38,0.12);color:var(--accent);}
 .admin-btn-sm.unban-btn:hover{background:rgba(22,163,74,0.12);color:#16a34a;}
-.admin-empty{font-size:12px;color:var-text-muted);text-align:center;padding:12px 0;}
+.admin-empty{font-size:12px;color:var(--text-muted);text-align:center;padding:12px 0;}
 
 /* CONTAINER */
 .container{max-width:960px;margin:0 auto;padding:0 16px 100px;}
@@ -108,7 +166,7 @@ body.dark .topnav{background:rgba(10,10,10,.88);}
 .tab{flex:1;padding:12px 0;text-align:center;font-size:12px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--text-muted);cursor:pointer;border:none;background:none;position:relative;transition:color .2s;-webkit-tap-highlight-color:transparent;font-family:'DM Sans',sans-serif;}
 .tab:hover{color:var(--text);}
 .tab.active{color:var(--text);}
-.tab.active::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:2px;background:var(--text);border-radius:2px 2px 0 0;}
+.tab.active::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:2px;background:var(--text);border-radius:2px 2px 0 0;transition:left .3s,right .3s;}
 .fav-row{display:flex;gap:10px;overflow-x:auto;padding:0 0 16px;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
 .fav-row::-webkit-scrollbar{display:none;}
 .fav-card{flex-shrink:0;width:148px;border-radius:14px;overflow:hidden;background:var(--card);box-shadow:var(--shadow);cursor:pointer;transition:transform .25s,box-shadow .25s;-webkit-tap-highlight-color:transparent;}
@@ -127,6 +185,8 @@ body.dark .topnav{background:rgba(10,10,10,.88);}
 .grid-item.touched .grid-overlay,.grid-item:hover .grid-overlay{opacity:1;}
 .grid-stat{color:#fff;font-weight:700;font-size:13px;display:flex;align-items:center;gap:4px;}
 .grid-stat i{font-size:14px;}
+.grid-gallery-dots{position:absolute;bottom:6px;right:6px;display:flex;gap:3px;z-index:2;}
+.grid-gallery-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.7);}
 .grid-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--text-muted);font-size:11px;font-weight:600;text-align:center;padding:8px;}
 .grid-placeholder i{font-size:24px;opacity:.4;}
 .list-card{background:var(--card);border-radius:var(--radius);margin-bottom:10px;box-shadow:var(--shadow);overflow:hidden;cursor:pointer;transition:transform .2s,box-shadow .2s;-webkit-tap-highlight-color:transparent;}
@@ -141,25 +201,39 @@ body.dark .topnav{background:rgba(10,10,10,.88);}
 .list-desc{font-size:12px;color:var(--text-muted);line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
 .list-stats{font-size:10px;color:var(--text-muted);margin-top:4px;display:flex;gap:10px;}
 .list-stats span{display:flex;align-items:center;gap:3px;}
+.list-gallery-badge{position:absolute;bottom:6px;right:6px;background:rgba(0,0,0,.5);color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;display:flex;align-items:center;gap:3px;}
 .empty-state{text-align:center;padding:50px 20px;color:var(--text-muted);}
 .empty-state i{font-size:48px;margin-bottom:14px;opacity:.25;display:block;}
 .empty-state p{font-size:15px;font-weight:500;}
 .empty-state span{font-size:13px;display:block;margin-top:6px;opacity:.7;}
+
+/* VIEW MODAL */
 .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;display:none;align-items:center;justify-content:center;padding:12px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);}
 .modal-backdrop.show{display:flex;animation:fadeIn .2s ease;}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.modal{background:var(--card);border-radius:20px;max-width:900px;width:100%;max-height:92vh;overflow:hidden;display:flex;animation:modalSlide .35s cubic-bezier(.16,1,.3,1);box-shadow:0 25px 60px rgba(0,0,0,.3);}
+.modal{background:var(--card);border-radius:20px;max-width:900px;width:100%;max-height:92vh;overflow:hidden;display:flex;animation:modalSlide .35s var(--transition-smooth);box-shadow:0 25px 60px rgba(0,0,0,.3);}
 @keyframes modalSlide{from{opacity:0;transform:scale(.92) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
 .modal-image{width:50%;min-height:360px;background:var(--bg-secondary);flex-shrink:0;position:relative;overflow:hidden;}
-.modal-image img{width:100%;height:100%;object-fit:cover;border-radius:0;margin:0;}
-.modal-image-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:60px;opacity:.2;background:linear-gradient(135deg,var(--bg-secondary),var(--card));}
+.modal-gallery-main{width:100%;height:100%;object-fit:cover;}
+.modal-gallery-main-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:60px;opacity:.2;background:linear-gradient(135deg,var(--bg-secondary),var(--card));}
+.modal-gallery-nav{position:absolute;top:50%;transform:translateY(-50%);width:32px;height:32px;border:none;border-radius:50%;background:rgba(0,0,0,.45);color:#fff;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;opacity:0;z-index:2;backdrop-filter:blur(4px);}
+.modal-image:hover .modal-gallery-nav,.modal-gallery-nav.visible{opacity:1;}
+.modal-gallery-nav:hover{background:rgba(0,0,0,.7);transform:translateY(-50%) scale(1.1);}
+.modal-gallery-nav:active{transform:translateY(-50%) scale(.95);}
+.modal-gallery-prev{left:8px;}
+.modal-gallery-next{right:8px;}
+.modal-gallery-dots{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:2;}
+.modal-gallery-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.4);cursor:pointer;transition:all .25s;border:none;padding:0;}
+.modal-gallery-dot.active{background:#fff;transform:scale(1.3);}
+.modal-gallery-count{position:absolute;top:12px;right:12px;background:rgba(0,0,0,.45);color:#fff;font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;z-index:2;backdrop-filter:blur(4px);}
 .modal-content{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0;}
 .modal-header{padding:14px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);flex-shrink:0;}
-.modal-avatar{width:38px;height:38px;border-radius:50%;background:var(--primary-glow);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;line-height:1;}
+.modal-avatar{width:38px;height:38px;border-radius:50%;background:var(--primary-glow);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;line-height:1;overflow:hidden;}
+.modal-avatar img{width:100%;height:100%;object-fit:cover;}
 .modal-user-info{flex:1;min-width:0;}
 .modal-username{font-weight:700;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .modal-category-badge{font-size:11px;color:var(--primary);font-weight:600;}
-.modal-close{width:32px;height:32px;border:none;border-radius:50%;background:transparent;color:var(--text-muted);font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;-webkit-tap-highlight-color:transparent;}
+.modal-close{width:32px;height:32px;border:none;border-radius:50%;background:transparent;color:var(--text-muted);font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;}
 .modal-close:hover{background:var(--bg-secondary);color:var(--text);}
 .modal-body{flex:1;overflow-y:auto;padding:16px;-webkit-overflow-scrolling:touch;scrollbar-width:thin;}
 .modal-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:14px;line-height:1.25;}
@@ -173,7 +247,7 @@ body.dark .topnav{background:rgba(10,10,10,.88);}
 .modal-instructions li{counter-increment:step;padding:8px 0 8px 34px;font-size:13px;line-height:1.5;position:relative;border-bottom:1px solid var(--border);}
 .modal-instructions li:last-child{border-bottom:none;}
 .modal-instructions li::before{content:counter(step);position:absolute;left:0;top:7px;width:24px;height:24px;border-radius:50%;background:var(--primary-glow);color:var(--primary);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;}
-.modal-stats-bar{display:flex;align-items:center;gap:14px;padding:10px 0;border-top:1px solid var(--border);font-size:12px;color:var(--text-muted);flex-wrap:wrap;}
+.modal-stats-bar{display:flex;align-items:center;gap:14px;padding:10px 16px;border-top:1px solid var(--border);font-size:12px;color:var(--text-muted);flex-wrap:wrap;flex-shrink:0;}
 .modal-stats-bar span{display:flex;align-items:center;gap:4px;font-weight:600;}
 .modal-stats-bar i{font-size:14px;}
 .modal-footer{padding:10px 16px;border-top:1px solid var(--border);display:flex;align-items:center;gap:10px;flex-shrink:0;}
@@ -185,35 +259,53 @@ body.dark .topnav{background:rgba(10,10,10,.88);}
 .modal-action-spacer{flex:1;}
 .modal-action-btn.delete-btn{color:var(--text-muted);font-size:18px;}
 .modal-action-btn.delete-btn:hover{color:var(--accent);}
-.comments-section{border-top:1px solid var(--border);padding:12px 0 0;}
+.modal-share-btn{color:var(--text);font-size:20px;}
+.modal-share-btn:hover{color:var(--primary);}
+
+/* SHARE TOAST */
+.share-bar{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--card);border:1px solid var(--border);border-radius:16px;padding:8px 10px;display:flex;gap:6px;z-index:600;opacity:0;transition:all .3s var(--transition-smooth);pointer-events:none;box-shadow:var(--shadow-lg);}
+.share-bar.show{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto;}
+.share-opt{width:44px;height:44px;border:none;border-radius:12px;background:var(--bg-secondary);color:var(--text);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;-webkit-tap-highlight-color:transparent;}
+.share-opt:hover{transform:scale(1.1);}
+.share-opt:active{transform:scale(.92);}
+.share-opt.whatsapp{color:#25D366;}
+.share-opt.twitter{color:#1DA1F2;}
+.share-opt.facebook{color:#1877F2;}
+.share-opt.copy-link{color:var(--primary);}
+
+/* COMMENTS */
+.comments-section{border-top:1px solid var(--border);padding:12px 16px;flex-shrink:0;}
 .comments-list{max-height:200px;overflow-y:auto;margin-bottom:8px;-webkit-overflow-scrolling:touch;}
-.comment-item{display:flex;gap:8px;margin-bottom:10px;}
-.comment-avatar{width:28px;height:28px;border-radius:50%;background:var(--primary-glow);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--primary);flex-shrink:0;}
+.comment-item{display:flex;gap:8px;margin-bottom:10px;animation:revealUp .3s var(--transition-smooth) both;}
+.comment-avatar{width:28px;height:28px;border-radius:50%;background:var(--primary-glow);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--primary);flex-shrink:0;overflow:hidden;}
+.comment-avatar img{width:100%;height:100%;object-fit:cover;}
 .comment-body{flex:1;min-width:0;}
 .comment-name{font-size:12px;font-weight:700;}
 .comment-text{font-size:12px;color:var(--text-muted);line-height:1.4;word-break:break-word;}
 .comment-time{font-size:10px;color:var(--text-muted);opacity:.6;margin-top:1px;}
 .no-comments{font-size:12px;color:var(--text-muted);text-align:center;padding:16px 0;}
 .comment-input-wrap{display:flex;gap:8px;align-items:flex-end;position:relative;}
-.comment-input{flex:1;padding:8px 12px;border-radius:20px;border:1px solid var(--border);background:var(--bg-secondary);color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;outline:none;resize:none;min-height:36px;max-height:80px;line-height:1.4;transition:border-color .2s;-webkit-appearance:none;}
+.comment-input{flex:1;padding:8px 12px;border-radius:20px;border:1px solid var(--border);background:var(--bg-secondary);color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;outline:none;resize:none;height:36px;max-height:80px;line-height:1.4;transition:border-color .2s;-webkit-appearance:none;}
 .comment-input:focus{border-color:var(--primary);}
-.comment-send{width:34px;height:34px;border-radius:50%;background:var(--primary);color:#fff;border:none;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;-webkit-tap-highlight-color:transparent;}
+.comment-send{width:34px;height:34px;border-radius:50%;background:var(--primary);color:#fff;border:none;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;}
 .comment-send:hover{background:var(--accent);}
 .comment-send:active{transform:scale(.9);}
-.emoji-btn{position:absolute;right:44px;bottom:2px;border:none;background:none;color:var(--text-muted);font-size:18px;cursor:pointer;padding:4px;transition:color .2s;-webkit-tap-highlight-color:transparent;}
+.emoji-btn{position:absolute;right:44px;bottom:2px;border:none;background:none;color:var(--text-muted);font-size:18px;cursor:pointer;padding:4px;transition:color .2s;}
 .emoji-btn:hover{color:var(--primary);}
-.emoji-picker{position:absolute;bottom:42px;right:0;width:260px;max-height:200px;background:var(--card);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow-lg);padding:8px;display:none;overflow-y:auto;z-index:10;-webkit-overflow-scrolling:touch;}
+.emoji-picker{position:absolute;bottom:42px;right:0;width:260px;max-height:200px;background:var(--card);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow-lg);padding:8px;display:none;overflow-y:auto;z-index:10;}
 .emoji-picker.show{display:block;animation:fadeIn .15s ease;}
 .emoji-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;text-align:center;}
-.emoji-grid span{font-size:20px;cursor:pointer;padding:4px;border-radius:6px;transition:background .15s;-webkit-tap-highlight-color:transparent;}
+.emoji-grid span{font-size:20px;cursor:pointer;padding:4px;border-radius:6px;transition:background .15s;}
 .emoji-grid span:hover{background:var(--bg-secondary);}
+
+/* ADD MODAL */
 .add-modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:300;display:none;align-items:flex-end;justify-content:center;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);}
 .add-modal-backdrop.show{display:flex;animation:fadeIn .2s ease;}
-.add-modal{background:var(--card);border-radius:24px 24px 0 0;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;animation:slideUp .4s cubic-bezier(.16,1,.3,1);padding-bottom:max(env(safe-area-inset-bottom,0px),16px);-webkit-overflow-scrolling:touch;}
+.add-modal{background:var(--card);border-radius:24px 24px 0 0;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;animation:slideUp .4s var(--transition-smooth);padding-bottom:max(env(safe-area-inset-bottom,0px),16px);}
 @keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
 .add-handle{width:40px;height:4px;background:var(--border);border-radius:4px;margin:10px auto 0;}
 .add-header{padding:14px 20px;text-align:center;font-weight:700;font-size:15px;border-bottom:1px solid var(--border);position:relative;}
-.add-close{position:absolute;right:14px;top:50%;transform:translateY(-50%);border:none;background:var(--bg-secondary);color:var(--text);width:28px;height:28px;border-radius:50%;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent;}
+.add-close{position:absolute;right:14px;top:50%;transform:translateY(-50%);border:none;background:var(--bg-secondary);color:var(--text);width:28px;height:28px;border-radius:50%;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
 .add-form{padding:16px 20px 20px;}
 .form-group{margin-bottom:14px;}
 .form-label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--text-muted);margin-bottom:5px;}
@@ -222,28 +314,45 @@ body.dark .topnav{background:rgba(10,10,10,.88);}
 .form-textarea{resize:vertical;min-height:72px;line-height:1.5;}
 .form-input:read-only{opacity:.6;cursor:default;}
 .form-select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%236b7280' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;}
-.image-upload{border:2px dashed var(--border);border-radius:12px;padding:24px;text-align:center;cursor:pointer;transition:all .25s;color:var(--text-muted);-webkit-tap-highlight-color:transparent;}
-.image-upload:hover,.image-upload:active{border-color:var(--primary);color:var(--primary);background:var(--primary-glow);}
-.image-upload i{font-size:26px;margin-bottom:6px;display:block;}
-.image-upload p{font-size:13px;font-weight:500;}
-.image-upload span{font-size:11px;opacity:.7;}
-.image-preview{width:100%;max-height:180px;object-fit:cover;border-radius:10px;margin-top:8px;display:none;}
-.form-submit{width:100%;padding:13px;border:none;border-radius:12px;background:var(--primary);color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .25s;letter-spacing:.3px;-webkit-tap-highlight-color:transparent;}
+
+/* Multi-image upload */
+.gallery-upload-area{display:flex;gap:8px;flex-wrap:wrap;}
+.gallery-upload-btn{width:80px;height:80px;border:2px dashed var(--border);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all .25s;color:var(--text-muted);font-size:11px;gap:4px;-webkit-tap-highlight-color:transparent;flex-shrink:0;}
+.gallery-upload-btn:hover,.gallery-upload-btn:active{border-color:var(--primary);color:var(--primary);background:var(--primary-glow);}
+.gallery-upload-btn i{font-size:20px;}
+.gallery-thumb{width:80px;height:80px;border-radius:12px;object-fit:cover;position:relative;flex-shrink:0;animation:revealScale .3s var(--transition-smooth) both;}
+.gallery-thumb-wrap{position:relative;width:80px;height:80px;flex-shrink:0;}
+.gallery-thumb-wrap img{width:100%;height:100%;border-radius:12px;object-fit:cover;}
+.gallery-thumb-remove{position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;background:var(--accent);color:#fff;border:none;font-size:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .2s;box-shadow:0 2px 6px rgba(0,0,0,.2);}
+.gallery-thumb-remove:hover{transform:scale(1.15);}
+.gallery-thumb-remove:active{transform:scale(.9);}
+.gallery-thumb-primary{position:absolute;bottom:4px;left:4px;background:var(--primary);color:#fff;font-size:8px;font-weight:700;padding:1px 5px;border-radius:4px;letter-spacing:.3px;}
+.image-preview-single{width:100%;max-height:180px;object-fit:cover;border-radius:10px;margin-top:8px;display:none;}
+
+.form-submit{width:100%;padding:13px;border:none;border-radius:12px;background:var(--primary);color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .25s;letter-spacing:.3px;}
 .form-submit:hover{background:var(--accent);transform:translateY(-1px);box-shadow:0 6px 20px var(--primary-glow);}
 .form-submit:active{transform:translateY(0) scale(.98);}
-.fab{position:fixed;bottom:24px;right:24px;width:52px;height:52px;border-radius:50%;background:var(--primary);color:#fff;border:none;font-size:22px;cursor:pointer;box-shadow:0 4px 16px var(--primary-glow);z-index:150;transition:all .3s;display:flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent;}
+.fab{position:fixed;bottom:24px;right:24px;width:52px;height:52px;border-radius:50%;background:var(--primary);color:#fff;border:none;font-size:22px;cursor:pointer;box-shadow:0 4px 16px var(--primary-glow);z-index:150;transition:all .3s;display:flex;align-items:center;justify-content:center;}
 .fab:hover{transform:scale(1.1) rotate(90deg);box-shadow:0 6px 24px var(--primary-glow);}
 .fab:active{transform:scale(.95);}
-.save-indicator{position:fixed;top:60px;right:16px;background:#16a34a;color:#fff;padding:8px 16px;border-radius:50px;font-size:12px;font-weight:600;z-index:500;display:flex;align-items:center;gap:6px;transform:translateX(120%);transition:transform .35s cubic-bezier(.16,1,.3,1);box-shadow:0 4px 12px rgba(22,163,74,.3);}
+.save-indicator{position:fixed;top:60px;right:16px;background:#16a34a;color:#fff;padding:8px 16px;border-radius:50px;font-size:12px;font-weight:600;z-index:500;display:flex;align-items:center;gap:6px;transform:translateX(120%);transition:transform .35s var(--transition-smooth);box-shadow:0 4px 12px rgba(22,163,74,.3);}
 .save-indicator.show{transform:translateX(0);}
-.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--text);color:var(--bg);padding:10px 22px;border-radius:50px;font-size:13px;font-weight:600;z-index:500;opacity:0;transition:all .3s cubic-bezier(.16,1,.3,1);pointer-events:none;white-space:nowrap;}
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--text);color:var(--bg);padding:10px 22px;border-radius:50px;font-size:13px;font-weight:600;z-index:500;opacity:0;transition:all .3s var(--transition-smooth);pointer-events:none;white-space:nowrap;max-width:90vw;text-overflow:ellipsis;overflow:hidden;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 .lang-loading{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--card);border-radius:20px;padding:40px 50px;text-align:center;z-index:600;box-shadow:var(--shadow-lg);display:none;}
 .lang-loading.show{display:block;animation:fadeIn .2s ease;}
 .lang-loading .spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px;}
-@keyframes spin{to{transform:rotate(360deg)}}
 .lang-loading p{font-size:14px;font-weight:600;color:var(--text);}
-@media(max-width:700px){.logo{font-size:14px;}.logo-dot{width:6px;height:6px;}.visitor-badge{display:none;}.story-ring{width:56px;height:56px;}.story-ring-inner{font-size:20px;}.story-label{font-size:9px;}.stories{gap:10px;}.modal{flex-direction:column;max-height:95vh;border-radius:16px 16px 0 0;margin-top:auto;}.modal-image{width:100%;min-height:220px;max-height:280px;}.modal-content{min-height:0;}.modal-title{font-size:18px;}.modal-avatar{width:34px;height:34px;font-size:18px;}.fav-card{width:130px;}.fav-card-img,.fav-card-placeholder{height:130px;}.list-thumb,.list-thumb-placeholder{width:85px;height:85px;}.list-title{font-size:13px;}.fab{bottom:20px;right:20px;width:48px;height:48px;font-size:20px;}.nav-btn .lang-label{display:none;}.story-label{max-width:52px;}.user-badge{display:none;}.admin-panel{max-width:95vw;}}
+
+@media(max-width:700px){
+.logo{font-size:14px;}.logo-dot{width:6px;height:6px;}.visitor-badge{display:none;}.story-ring{width:56px;height:56px;}.story-ring-inner{font-size:20px;}.story-label{font-size:9px;}.stories{gap:10px;}
+.modal{flex-direction:column;max-height:95vh;border-radius:16px 16px 0 0;margin-top:auto;}.modal-image{width:100%;min-height:220px;max-height:280px;}.modal-content{min-height:0;}.modal-title{font-size:18px;}.modal-avatar{width:34px;height:34px;font-size:18px;}
+.fav-card{width:130px;}.fav-card-img,.fav-card-placeholder{height:130px;}.list-thumb,.list-thumb-placeholder{width:85px;height:85px;}.list-title{font-size:13px;}
+.fab{bottom:20px;right:20px;width:48px;height:48px;font-size:20px;}.nav-btn .lang-label{display:none;}.story-label{max-width:52px;}.user-badge{display:none;}
+.admin-panel,.profile-panel{max-width:95vw;}.modal-stats-bar{padding:10px 16px;}.modal-footer{padding:10px 16px;}.comments-section{padding:12px 16px;}
+.gallery-upload-btn{width:68px;height:68px;}.gallery-thumb-wrap{width:68px;height:68px;}
+.share-bar{bottom:80px;}
+}
 @media(min-width:701px){.recipe-grid{gap:4px;}}
 @media(max-width:360px){.story-ring{width:50px;height:50px;}.story-ring-inner{font-size:18px;}.fav-card{width:120px;}.fav-card-img,.fav-card-placeholder{height:120px;}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
@@ -254,21 +363,21 @@ body.dark .topnav{background:rgba(10,10,10,.88);}
 
 <div class="auth-overlay" id="authOverlay">
 <div class="auth-box">
-    <div class="auth-logo"><span class="logo-dot"></span> NDESANJO FAMILY RECEPIES</div>
+    <div class="auth-logo"><span class="logo-dot"></span> NDESANJO FAMILY RECIPES</div>
     <p class="auth-sub">Share family recipes with the world</p>
     <div class="auth-tabs"><button class="auth-tab active" onclick="switchAuthTab('login')" id="tabLogin">Login</button><button class="auth-tab" onclick="switchAuthTab('signup')" id="tabSignup">Sign Up</button></div>
     <div class="auth-error" id="authError"></div>
     <form class="auth-form active" id="loginForm" onsubmit="handleLogin(event)">
-        <div class="auth-field"><label class="auth-label">Username</label><input type="text" class="auth-input" id="loginUser" required autocomplete="username"></div>
-        <div class="auth-field"><label class="auth-label">Password</label><input type="password" class="auth-input" id="loginPass" required autocomplete="current-password"></div>
-        <button type="submit" class="auth-submit">Login</button>
+        <div class="auth-field"><label class="auth-label">Username</label><input type="text" class="auth-input" id="loginUser" required autocomplete="username" oninput="clearAuthError()"></div>
+        <div class="auth-field"><label class="auth-label">Password</label><input type="password" class="auth-input" id="loginPass" required autocomplete="current-password" oninput="clearAuthError()"></div>
+        <button type="submit" class="auth-submit" id="loginBtn"><span class="btn-text">Login</span><span class="btn-spinner"></span></button>
         <p class="auth-hint">Don't have an account? <a href="#" onclick="switchAuthTab('signup');return false;">Sign up</a></p>
     </form>
     <form class="auth-form" id="signupForm" onsubmit="handleSignup(event)">
-        <div class="auth-field"><label class="auth-label">Username</label><input type="text" class="auth-input" id="signupUser" required autocomplete="username" minlength="3" maxlength="30"></div>
-        <div class="auth-field"><label class="auth-label">Password</label><input type="password" class="auth-input" id="signupPass" required autocomplete="new-password" minlength="4"></div>
-        <div class="auth-field"><label class="auth-label">Confirm Password</label><input type="password" class="auth-input" id="signupConfirm" required autocomplete="new-password"></div>
-        <button type="submit" class="auth-submit">Create Account</button>
+        <div class="auth-field"><label class="auth-label">Username</label><input type="text" class="auth-input" id="signupUser" required autocomplete="username" minlength="3" maxlength="30" oninput="clearAuthError()"></div>
+        <div class="auth-field"><label class="auth-label">Password</label><input type="password" class="auth-input" id="signupPass" required autocomplete="new-password" minlength="4" oninput="clearAuthError()"></div>
+        <div class="auth-field"><label class="auth-label">Confirm Password</label><input type="password" class="auth-input" id="signupConfirm" required autocomplete="new-password" oninput="clearAuthError()"></div>
+        <button type="submit" class="auth-submit" id="signupBtn"><span class="btn-text">Create Account</span><span class="btn-spinner"></span></button>
         <p class="auth-hint">Already have an account? <a href="#" onclick="switchAuthTab('login');return false;">Login</a></p>
     </form>
 </div>
@@ -276,10 +385,14 @@ body.dark .topnav{background:rgba(10,10,10,.88);}
 
 <nav class="topnav">
 <div class="topnav-inner">
-    <div class="logo"><span class="logo-dot"></span> NDESANJO FAMILY RECEPIES</div>
+    <div class="logo"><span class="logo-dot"></span> NDESANJO FAMILY RECIPES</div>
     <div class="nav-right">
         <div class="visitor-badge" id="visitorBadge" onclick="openAdminPanel()"><span class="visitor-dot"></span> <span id="visitorCount">1</span> online</div>
-        <div class="user-badge" id="userBadge" onclick="handleUserBadgeClick()"><i class="fa-solid fa-user"></i> <span id="userName"></span></div>
+        <div class="user-badge" id="userBadge" onclick="handleUserBadgeClick()">
+            <img class="user-badge-avatar" id="userBadgeAvatar" src="" alt="">
+            <i class="fa-solid fa-user"></i>
+            <span id="userName"></span>
+        </div>
         <div class="nav-actions">
             <button class="nav-btn" id="langBtn" onclick="toggleLang()"><i class="fa-solid fa-globe"></i><span class="lang-label" id="langLabel">SW</span></button>
             <button class="nav-btn" onclick="openAdd()"><i class="fa-solid fa-plus"></i></button>
@@ -302,23 +415,45 @@ body.dark .topnav{background:rgba(10,10,10,.88);}
 <div class="lang-loading" id="langLoading"><div class="spinner"></div><p id="langLoadingText">Translating...</p></div>
 
 <!-- ADMIN PANEL -->
-<div class="admin-panel-backdrop" id="adminBackdrop" onclick="closeAdminPanel(event)">
+<div class="admin-panel-backdrop" id="adminBackdrop" onclick="closeAdmin(event)">
 <div class="admin-panel" onclick="event.stopPropagation()">
-    <div class="admin-header">
-        <div class="admin-title"><i class="fa-solid fa-shield-halved"></i> Admin Panel</div>
-        <button class="admin-close" onclick="closeAdminPanelForce()" aria-label="Close">&times;</button>
+    <div class="admin-header"><div class="admin-title"><i class="fa-solid fa-shield-halved"></i> Admin Panel</div><button class="admin-close" onclick="closeAdminForce()" aria-label="Close">&times;</button></div>
+    <div class="admin-section"><div class="admin-section-title"><i class="fa-solid fa-users"></i> Online Users</div><div id="adminOnlineList"></div></div>
+    <div class="admin-section"><div class="admin-section-title"><i class="fa-solid fa-ban"></i> Banned Users</div><div id="adminBannedList"></div></div>
+</div>
+</div>
+
+<!-- PROFILE PANEL -->
+<div class="profile-backdrop" id="profileBackdrop" onclick="closeProfile(event)">
+<div class="profile-panel" onclick="event.stopPropagation()">
+    <div class="profile-header-area">
+        <button class="profile-close" onclick="closeProfileForce()" aria-label="Close">&times;</button>
+        <div class="profile-avatar-wrap" onclick="document.getElementById('profilePhotoInput').click()">
+            <img class="profile-avatar-img" id="profileAvatarImg" src="" style="display:none;">
+            <div class="profile-avatar-placeholder" id="profileAvatarPlaceholder"></div>
+            <div class="profile-avatar-overlay"><i class="fa-solid fa-camera"></i></div>
+        </div>
+        <input type="file" id="profilePhotoInput" accept="image/*" style="display:none" onchange="previewProfilePhoto(this)">
+        <div class="profile-username" id="profileDisplayName"></div>
+        <div class="profile-bio" id="profileDisplayBio"></div>
+        <div class="profile-joined" id="profileJoined"></div>
     </div>
-    <div class="admin-section">
-        <div class="admin-section-title"><i class="fa-solid fa-users"></i> Online Users</div>
-        <div id="adminOnlineList"></div>
+    <div class="profile-stats">
+        <div class="profile-stat"><div class="profile-stat-num" id="profileRecipeCount">0</div><div class="profile-stat-label">Recipes</div></div>
+        <div class="profile-stat"><div class="profile-stat-num" id="profileLikeCount">0</div><div class="profile-stat-label">Likes</div></div>
+        <div class="profile-stat"><div class="profile-stat-num" id="profileFavCount">0</div><div class="profile-stat-label">Favorites</div></div>
     </div>
-    <div class="admin-section">
-        <div class="admin-section-title"><i class="fa-solid fa-ban"></i> Banned Users</div>
-        <div id="adminBannedList"></div>
+    <div class="profile-section">
+        <div class="profile-section-title">Edit Profile</div>
+        <div class="profile-field"><label>Username</label><input type="text" id="profileUsername" minlength="3" maxlength="30"></div>
+        <div class="profile-field"><label>Bio</label><textarea id="profileBio" maxlength="200" placeholder="Tell us about yourself..."></textarea></div>
+        <button class="profile-save-btn" onclick="saveProfile()">Save Changes</button>
+        <button class="profile-logout" onclick="logoutFromProfile()">Logout</button>
     </div>
 </div>
 </div>
 
+<!-- VIEW MODAL -->
 <div class="modal-backdrop" id="viewModal" onclick="closeView(event)">
 <div class="modal" onclick="event.stopPropagation()">
     <div class="modal-image" id="modalImage"></div>
@@ -332,6 +467,7 @@ body.dark .topnav{background:rgba(10,10,10,.88);}
 </div>
 </div>
 
+<!-- ADD MODAL -->
 <div class="add-modal-backdrop" id="addModal" onclick="closeAdd(event)">
 <div class="add-modal" onclick="event.stopPropagation()">
     <div class="add-handle"></div>
@@ -342,7 +478,13 @@ body.dark .topnav{background:rgba(10,10,10,.88);}
         <div class="form-group"><label class="form-label" id="lblCat"></label><select class="form-select" id="fCategory"><option value="Breakfast">Breakfast</option><option value="Lunch">Lunch</option><option value="Dinner">Dinner</option><option value="Dessert">Dessert</option></select></div>
         <div class="form-group"><label class="form-label" id="lblIng"></label><textarea class="form-textarea" id="fIngredients" required></textarea></div>
         <div class="form-group"><label class="form-label" id="lblInst"></label><textarea class="form-textarea" id="fInstructions" required></textarea></div>
-        <div class="form-group"><label class="form-label" id="lblPhoto"></label><div class="image-upload" onclick="document.getElementById('fImage').click()"><i class="fa-solid fa-camera"></i><p id="uploadText"></p><span>JPG, PNG up to 5MB</span></div><input type="file" id="fImage" accept="image/*" style="display:none" onchange="previewImage(this)"><img class="image-preview" id="imgPreview"></div>
+        <div class="form-group">
+            <label class="form-label" id="lblPhoto"></label>
+            <div class="gallery-upload-area" id="galleryUploadArea">
+                <div class="gallery-upload-btn" onclick="document.getElementById('fImages').click()"><i class="fa-solid fa-camera"></i><span>Add</span></div>
+            </div>
+            <input type="file" id="fImages" accept="image/*" multiple style="display:none" onchange="previewGalleryImages(this)">
+        </div>
         <div class="form-group"><label class="form-label" id="lblAuthor"></label><input type="text" class="form-input" id="fAuthor" readonly></div>
         <button type="submit" class="form-submit" id="submitBtn"></button>
     </form>
@@ -352,257 +494,805 @@ body.dark .topnav{background:rgba(10,10,10,.88);}
 <div class="save-indicator" id="saveIndicator"><i class="fa-solid fa-check-circle"></i><span id="savedText">Saved</span></div>
 <div class="toast" id="toast"></div>
 
+<!-- SHARE BAR -->
+<div class="share-bar" id="shareBar">
+    <button class="share-opt whatsapp" onclick="shareWhatsApp()" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></button>
+    <button class="share-opt twitter" onclick="shareTwitter()" title="X / Twitter"><i class="fa-brands fa-x-twitter"></i></button>
+    <button class="share-opt facebook" onclick="shareFacebook()" title="Facebook"><i class="fa-brands fa-facebook-f"></i></button>
+    <button class="share-opt copy-link" onclick="copyRecipeLink()" title="Copy Link"><i class="fa-solid fa-link"></i></button>
+</div>
+
 <script>
-var recipes=JSON.parse(localStorage.getItem('ndesanjo_recipes'))||[];
-var currentView='all',currentTab='grid',currentLang=localStorage.getItem('ndesanjo_lang')||'en',viewingIndex=-1,saveTimeout=null;
-var translationCache={};try{translationCache=JSON.parse(localStorage.getItem('ndesanjo_translations'))||{};}catch(e){}
-var catValues=['Breakfast','Lunch','Dinner','Dessert'];
-var categoryIcons={all:'<i class="fa-solid fa-utensils"></i>',Breakfast:'<i class="fa-solid fa-egg"></i>',Lunch:'<i class="fa-solid fa-burger"></i>',Dinner:'<i class="fa-solid fa-bowl-food"></i>',Dessert:'<i class="fa-solid fa-cake-candles"></i>',Favorites:'<i class="fa-solid fa-heart"></i>'};
-var EMOJI_MAP={Breakfast:'🍳',Lunch:'🥗',Dinner:'🍽️',Dessert:'🍰'};
-function getCatEmoji(c){return EMOJI_MAP[c]||'🍽️';}
+var recipes = JSON.parse(localStorage.getItem('ndesanjo_recipes')) || [];
+var currentView = 'all', currentTab = 'grid', currentLang = localStorage.getItem('ndesanjo_lang') || 'en', viewingIndex = -1, saveTimeout = null;
+var translationCache = {};
+try { translationCache = JSON.parse(localStorage.getItem('ndesanjo_translations')) || {}; } catch(e) {}
+var catValues = ['Breakfast', 'Lunch', 'Dinner', 'Dessert'];
+var categoryIcons = { all:'<i class="fa-solid fa-utensils"></i>', Breakfast:'<i class="fa-solid fa-egg"></i>', Lunch:'<i class="fa-solid fa-burger"></i>', Dinner:'<i class="fa-solid fa-bowl-food"></i>', Dessert:'<i class="fa-solid fa-cake-candles"></i>', Favorites:'<i class="fa-solid fa-heart"></i>' };
+var EMOJI_MAP = { Breakfast:'\u{1F373}', Lunch:'\u{1F957}', Dinner:'\u{1F37D}\uFE0F', Dessert:'\u{1F370}' };
+function getCatEmoji(c) { return EMOJI_MAP[c] || '\u{1F37D}\uFE0F'; }
+function escHtml(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+function escAttr(s) { return s.replace(/'/g, '&#39;').replace(/"/g, '&quot;'); }
+function timeAgo(ts) { var s = Math.floor((Date.now() - ts) / 1000); if (s < 60) return 'just now'; if (s < 3600) return Math.floor(s / 60) + 'm ago'; if (s < 86400) return Math.floor(s / 3600) + 'h ago'; if (s < 604800) return Math.floor(s / 86400) + 'd ago'; return new Date(ts).toLocaleDateString(); }
+function formatNum(n) { if (n >= 1000) return (n / 1000).toFixed(1) + 'k'; return n; }
+
+/* Temp gallery images for add form */
+var tempGalleryImages = [];
+var currentGallerySlide = 0;
+var shareRecipeIndex = -1;
 
 /* ===== AUTH ===== */
-var currentUser=null;
-function isAdminUser(){return currentUser&&currentUser.substring(0,3)==='000';}
-function getUsers(){try{return JSON.parse(localStorage.getItem('ndesanjo_users'))||[];}catch(e){return[];}}
-function saveUsers(u){try{localStorage.setItem('ndesanjo_users',JSON.stringify(u));}catch(e){}}
-function getBanned(){try{return JSON.parse(localStorage.getItem('ndesanjo_banned'))||[];}catch(e){return[];}
-function saveBanned(b){try{localStorage.setItem('ndesanjo_banned',JSON.stringify(b));}catch(e){}}
+var currentUser = null;
+var isAuthLoading = false;
+function isAdminUser() { return currentUser && currentUser.substring(0, 3) === '000'; }
+function getUsers() { try { return JSON.parse(localStorage.getItem('ndesanjo_users')) || []; } catch(e) { return []; } }
+function saveUsers(u) { try { localStorage.setItem('ndesanjo_users', JSON.stringify(u)); } catch(e) {} }
+function getBanned() { try { return JSON.parse(localStorage.getItem('ndesanjo_banned')) || []; } catch(e) { return []; } }
+function saveBanned(b) { try { localStorage.setItem('ndesanjo_banned', JSON.stringify(b)); } catch(e) {} }
 
-async function hashPassword(pwd){var enc=new TextEncoder();return Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',enc.encode(pwd))).map(function(b){return b.toString(16).padStart(2,'0');}).join('');}
-
-function checkSession(){try{var s=JSON.parse(localStorage.getItem('ndesanjo_session'));if(s&&s.name)return true;}catch(e){}return false;}
-function createSession(name){currentUser=name;try{localStorage.setItem('ndesanjo_session',JSON.stringify({name:name,ts:Date.now()}));}catch(e){}}
-function destroySession(){currentUser=null;try{localStorage.removeItem('ndesanjo_session');}catch(e){}}
-
-function switchAuthTab(tab){document.getElementById('loginForm').classList.toggle('active',tab==='login');document.getElementById('signupForm').classList.toggle('active',tab==='signup');document.getElementById('tabLogin').classList.toggle('active',tab==='login');document.getElementById('tabSignup').classList.toggle('active',tab==='signup');document.getElementById('authError').classList.remove('show');}
-function showAuthError(msg){var el=document.getElementById('authError');el.textContent=msg;el.classList.add('show');}
-
-async function handleSignup(e){
-    e.preventDefault();
-    var name=document.getElementById('signupUser').value.trim();
-    var pass=document.getElementById('signupPass').value;
-    var confirm=document.getElementById('signupConfirm').value;
-    if(name.length<3){showAuthError('Username must be at least 3 characters');return;}
-    if(!/^[a-zA-Z0-9_]+$/.test(name)){showAuthError('Username can only contain letters, numbers, and underscores');return;}
-    if(pass.length<4){showAuthError('Password must be at least 4 characters');return;}
-    if(pass!==confirm){showAuthError('Passwords do not match');return;}
-    var users=getUsers();
-    for(var i=0;i<users.length;i++){if(users[i].name.toLowerCase()===name.toLowerCase()){showAuthError('Username already taken');return;}}
-    var hash=await hashPassword(pass);
-    users.push({name:name,hash:hash});
-    saveUsers(users);createSession(name);enterApp();
+function hashPassword(pwd) {
+    return new Promise(function(resolve) {
+        try {
+            if (window.crypto && window.crypto.subtle) {
+                var enc = new TextEncoder();
+                window.crypto.subtle.digest('SHA-256', enc.encode(pwd)).then(function(buf) {
+                    var arr = new Uint8Array(buf); var hex = '';
+                    for (var i = 0; i < arr.length; i++) hex += arr[i].toString(16).padStart(2, '0');
+                    resolve(hex);
+                }).catch(function() { resolve(fallbackHash(pwd)); });
+            } else { resolve(fallbackHash(pwd)); }
+        } catch(e) { resolve(fallbackHash(pwd)); }
+    });
+}
+function fallbackHash(str) {
+    var h1 = 0xdeadbeef, h2 = 0x41c6ce57;
+    for (var i = 0; i < str.length; i++) { var ch = str.charCodeAt(i); h1 = Math.imul(h1 ^ ch, 2654435761); h2 = Math.imul(h2 ^ ch, 1597334677); }
+    h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+    h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+    var combined = (4294967296 * (2097151 & h2) + (h1 >>> 0)).toString(16);
+    return combined.padStart(16, '0');
 }
 
-async function handleLogin(e){
-    e.preventDefault();
-    var name=document.getElementById('loginUser').value.trim();
-    var pass=document.getElementById('loginPass').value;
-    if(!name||!pass){showAuthError('Please fill in all fields');return;}
-    var users=getUsers();var hash=await hashPassword(pass);var found=false;
-    for(var i=0;i<users.length;i++){if(users[i].name.toLowerCase()===name.toLowerCase()&&users[i].hash===hash){found=true;break;}}
-    if(!found){showAuthError('Invalid username or password');return;}
-    /* Check ban */
-    var banned=getBanned();
-    for(var j=0;j<banned.length;j++){if(banned[j].name.toLowerCase()===name.toLowerCase()){showAuthError('This account has been suspended');return;}}
-    createSession(name);enterApp();
+function checkSession() { try { var s = JSON.parse(localStorage.getItem('ndesanjo_session')); if (s && s.name) return true; } catch(e) {} return false; }
+function createSession(name) { currentUser = name; try { localStorage.setItem('ndesanjo_session', JSON.stringify({ name: name, ts: Date.now() })); } catch(e) {} }
+function destroySession() { currentUser = null; try { localStorage.removeItem('ndesanjo_session'); } catch(e) {} }
+
+function getUserProfile(name) {
+    try { var profiles = JSON.parse(localStorage.getItem('ndesanjo_profiles')) || {}; return profiles[name.toLowerCase()] || null; } catch(e) { return null; }
+}
+function saveUserProfile(name, data) {
+    try { var profiles = JSON.parse(localStorage.getItem('ndesanjo_profiles')) || {}; profiles[name.toLowerCase()] = data; localStorage.setItem('ndesanjo_profiles', JSON.stringify(profiles)); } catch(e) {}
+}
+function getUserPhoto(name) { var p = getUserProfile(name); return (p && p.photo) || ''; }
+function getUserDisplayName(name) { var p = getUserProfile(name); return (p && p.displayName) || name; }
+function getUserBio(name) { var p = getUserProfile(name); return (p && p.bio) || ''; }
+
+function switchAuthTab(tab) {
+    document.getElementById('loginForm').classList.toggle('active', tab === 'login');
+    document.getElementById('signupForm').classList.toggle('active', tab === 'signup');
+    document.getElementById('tabLogin').classList.toggle('active', tab === 'login');
+    document.getElementById('tabSignup').classList.toggle('active', tab === 'signup');
+    clearAuthError();
+}
+function showAuthError(msg) { var el = document.getElementById('authError'); el.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i>' + msg; el.classList.add('show'); }
+function clearAuthError() { document.getElementById('authError').classList.remove('show'); }
+function setAuthLoading(btnId, loading) { var btn = document.getElementById(btnId); if (loading) { btn.classList.add('loading'); btn.disabled = true; } else { btn.classList.remove('loading'); btn.disabled = false; } }
+
+async function handleSignup(e) {
+    e.preventDefault(); if (isAuthLoading) return;
+    var name = document.getElementById('signupUser').value.trim();
+    var pass = document.getElementById('signupPass').value;
+    var confirm = document.getElementById('signupConfirm').value;
+    if (name.length < 3) { showAuthError('Username must be at least 3 characters'); return; }
+    if (!/^[a-zA-Z0-9_]+$/.test(name)) { showAuthError('Username can only contain letters, numbers, and underscores'); return; }
+    if (pass.length < 4) { showAuthError('Password must be at least 4 characters'); return; }
+    if (pass !== confirm) { showAuthError('Passwords do not match'); return; }
+    isAuthLoading = true; setAuthLoading('signupBtn', true);
+    try {
+        var users = getUsers();
+        for (var i = 0; i < users.length; i++) { if (users[i].name.toLowerCase() === name.toLowerCase()) { showAuthError('Username "' + name + '" is already taken'); isAuthLoading = false; setAuthLoading('signupBtn', false); return; } }
+        var hash = await hashPassword(pass);
+        users.push({ name: name, hash: hash, joined: Date.now() });
+        saveUsers(users);
+        saveUserProfile(name, { displayName: name, bio: '', photo: '', joined: Date.now() });
+        createSession(name); enterApp();
+    } catch(err) { showAuthError('Something went wrong. Please try again.'); }
+    isAuthLoading = false; setAuthLoading('signupBtn', false);
 }
 
-function handleUserBadgeClick(){if(confirm('Logout '+currentUser+'?')){destroySession();document.getElementById('authOverlay').classList.remove('hidden');document.getElementById('loginUser').value='';document.getElementById('loginPass').value='';document.getElementById('authError').classList.remove('show');}}
+async function handleLogin(e) {
+    e.preventDefault(); if (isAuthLoading) return;
+    var name = document.getElementById('loginUser').value.trim();
+    var pass = document.getElementById('loginPass').value;
+    if (!name) { showAuthError('Please enter your username'); return; }
+    if (!pass) { showAuthError('Please enter your password'); return; }
+    isAuthLoading = true; setAuthLoading('loginBtn', true);
+    try {
+        var users = getUsers(), foundUser = null;
+        for (var i = 0; i < users.length; i++) { if (users[i].name.toLowerCase() === name.toLowerCase()) { foundUser = users[i]; break; } }
+        if (!foundUser) { showAuthError('No account found with username "' + name + '"'); isAuthLoading = false; setAuthLoading('loginBtn', false); return; }
+        var hash = await hashPassword(pass);
+        if (foundUser.hash !== hash) { showAuthError('Incorrect password. Please try again.'); isAuthLoading = false; setAuthLoading('loginBtn', false); return; }
+        var banned = getBanned();
+        for (var j = 0; j < banned.length; j++) { if (banned[j].name.toLowerCase() === name.toLowerCase()) { showAuthError('This account has been suspended by an admin'); isAuthLoading = false; setAuthLoading('loginBtn', false); return; } }
+        createSession(foundUser.name); enterApp();
+    } catch(err) { showAuthError('Something went wrong. Please try again.'); }
+    isAuthLoading = false; setAuthLoading('loginBtn', false);
+}
 
-function enterApp(){
+function handleUserBadgeClick() { openProfile(); }
+
+function enterApp() {
     document.getElementById('authOverlay').classList.add('hidden');
-    document.getElementById('userName').textContent=currentUser;
-    /* Show admin indicator if admin */
-    var badge=document.getElementById('userBadge');
-    if(isAdminUser()){badge.classList.add('admin-badge');}
-    else{badge.classList.remove('admin-badge');}
-    updateUIStrings();renderStories();render();
+    var displayName = getUserDisplayName(currentUser);
+    document.getElementById('userName').textContent = displayName;
+    var badge = document.getElementById('userBadge');
+    if (isAdminUser()) badge.classList.add('admin-badge'); else badge.classList.remove('admin-badge');
+    var photo = getUserPhoto(currentUser);
+    var avEl = document.getElementById('userBadgeAvatar');
+    if (photo) { avEl.src = photo; avEl.classList.add('visible'); badge.classList.add('has-avatar'); }
+    else { avEl.classList.remove('visible'); badge.classList.remove('has-avatar'); }
+    updateUIStrings(); renderStories(); render();
 }
 
-/* ===== VISITOR TRACKING (stores names) ===== */
-function updateVisitorCount(){var now=Date.now(),wm=120000;
-    try{
-        var vc=JSON.parse(localStorage.getItem('ndesanjo_visitors'))||[];
-        vc=vc.filter(function(t){return now-t<wm;});
-        var fid=currentUser||'anon';
-        var found=false;
-        for(var i=0;i<vc.length;i++){if(vc[i].id===fid){found=true;vc[i].t=now;vc[i].name=currentUser||'Anonymous';break;}}
-        if(!found)vc.push({id:fid,name:currentUser||'Anonymous',t:now});
-        localStorage.setItem('ndesanjo_visitors',JSON.stringify(vc));
-        document.getElementById('visitorCount').textContent=vc.length;
-    }catch(e){document.getElementById('visitorCount').textContent='1';}
+/* ===== PROFILE ===== */
+function openProfile() {
+    if (!currentUser) return;
+    var profile = getUserProfile(currentUser) || {};
+    var photo = profile.photo || '';
+    var displayName = profile.displayName || currentUser;
+    var bio = profile.bio || '';
+    var joined = profile.joined || Date.now();
+
+    document.getElementById('profileUsername').value = displayName;
+    document.getElementById('profileBio').value = bio;
+    document.getElementById('profileDisplayName').textContent = displayName;
+    document.getElementById('profileDisplayBio').textContent = bio || 'No bio yet';
+    document.getElementById('profileJoined').textContent = 'Joined ' + new Date(joined).toLocaleDateString();
+
+    var imgEl = document.getElementById('profileAvatarImg');
+    var phEl = document.getElementById('profileAvatarPlaceholder');
+    if (photo) { imgEl.src = photo; imgEl.style.display = 'block'; phEl.style.display = 'none'; }
+    else { imgEl.style.display = 'none'; phEl.style.display = 'flex'; phEl.textContent = displayName.charAt(0).toUpperCase(); }
+
+    /* Stats */
+    var myRecipes = 0, myLikes = 0, myFavs = 0;
+    for (var i = 0; i < recipes.length; i++) {
+        if (recipes[i].ownerId === currentUser) { myRecipes++; myLikes += (recipes[i].likes || 0); }
+        if (recipes[i].fav) myFavs++;
+    }
+    document.getElementById('profileRecipeCount').textContent = myRecipes;
+    document.getElementById('profileLikeCount').textContent = myLikes;
+    document.getElementById('profileFavCount').textContent = myFavs;
+
+    document.getElementById('profileBackdrop').classList.add('show');
+    document.body.style.overflow = 'hidden';
 }
-updateVisitorCount();setInterval(updateVisitorCount,30000);
+function closeProfile(e) { if (e.target === e.currentTarget) closeProfileForce(); }
+function closeProfileForce() { document.getElementById('profileBackdrop').classList.remove('show'); document.body.style.overflow = ''; }
+
+function previewProfilePhoto(input) {
+    if (!input.files || !input.files[0]) return;
+    var reader = new FileReader();
+    reader.onload = function(e) {
+        /* Compress */
+        compressImage(e.target.result, 300, 0.8, function(dataUrl) {
+            document.getElementById('profileAvatarImg').src = dataUrl;
+            document.getElementById('profileAvatarImg').style.display = 'block';
+            document.getElementById('profileAvatarPlaceholder').style.display = 'none';
+            saveProfilePhoto(dataUrl);
+        });
+    };
+    reader.readAsDataURL(input.files[0]);
+}
+function saveProfilePhoto(dataUrl) {
+    var profile = getUserProfile(currentUser) || { displayName: currentUser, bio: '', photo: '', joined: Date.now() };
+    profile.photo = dataUrl;
+    saveUserProfile(currentUser, profile);
+    updateBadgeAvatar();
+}
+function updateBadgeAvatar() {
+    var photo = getUserPhoto(currentUser);
+    var avEl = document.getElementById('userBadgeAvatar');
+    var badge = document.getElementById('userBadge');
+    if (photo) { avEl.src = photo; avEl.classList.add('visible'); badge.classList.add('has-avatar'); }
+    else { avEl.classList.remove('visible'); badge.classList.remove('has-avatar'); }
+    document.getElementById('userName').textContent = getUserDisplayName(currentUser);
+}
+
+function saveProfile() {
+    var newName = document.getElementById('profileUsername').value.trim();
+    var newBio = document.getElementById('profileBio').value.trim();
+    if (newName.length < 3) { showToast('Username must be at least 3 characters'); return; }
+    if (!/^[a-zA-Z0-9_ ]+$/.test(newName)) { showToast('Username can only contain letters, numbers, spaces, and underscores'); return; }
+
+    /* Check uniqueness if changed */
+    if (newName.toLowerCase() !== currentUser.toLowerCase()) {
+        var users = getUsers();
+        for (var i = 0; i < users.length; i++) {
+            if (users[i].name.toLowerCase() === newName.toLowerCase() && users[i].name.toLowerCase() !== currentUser.toLowerCase()) {
+                showToast('Username "' + newName + '" is already taken'); return;
+            }
+        }
+    }
+
+    var profile = getUserProfile(currentUser) || { displayName: currentUser, bio: '', photo: '', joined: Date.now() };
+    profile.displayName = newName;
+    profile.bio = newBio;
+    saveUserProfile(currentUser, profile);
+
+    /* If username actually changed, update user record */
+    if (newName.toLowerCase() !== currentUser.toLowerCase()) {
+        var users = getUsers();
+        for (var j = 0; j < users.length; j++) {
+            if (users[j].name.toLowerCase() === currentUser.toLowerCase()) { users[j].name = newName; break; }
+        }
+        saveUsers(users);
+
+        /* Update recipe ownership */
+        for (var k = 0; k < recipes.length; k++) { if (recipes[k].ownerId === currentUser) recipes[k].ownerId = newName; }
+        for (var m = 0; m < recipes.length; m++) { if (recipes[m].author === currentUser) recipes[m].author = newName; }
+        for (var n = 0; n < recipes.length; n++) {
+            if (recipes[n].comments) { for (var c = 0; c < recipes[n].comments.length; c++) { if (recipes[n].comments[c].userId === currentUser) recipes[n].comments[c].name = newName; recipes[n].comments[c].userId = newName; } }
+        }
+        save();
+
+        /* Transfer profile data */
+        saveUserProfile(newName, profile);
+        try { var profiles = JSON.parse(localStorage.getItem('ndesanjo_profiles')) || {}; delete profiles[currentUser.toLowerCase()]; localStorage.setItem('ndesanjo_profiles', JSON.stringify(profiles)); } catch(e) {}
+
+        currentUser = newName;
+        createSession(newName);
+    }
+
+    document.getElementById('profileDisplayName').textContent = newName;
+    document.getElementById('profileDisplayBio').textContent = newBio || 'No bio yet';
+    if (!getUserPhoto(currentUser)) { document.getElementById('profileAvatarPlaceholder').textContent = newName.charAt(0).toUpperCase(); }
+    updateBadgeAvatar();
+    render();
+    showToast('Profile updated');
+}
+
+function logoutFromProfile() {
+    closeProfileForce();
+    destroySession();
+    document.getElementById('authOverlay').classList.remove('hidden');
+    document.getElementById('loginUser').value = '';
+    document.getElementById('loginPass').value = '';
+    clearAuthError();
+}
+
+/* ===== IMAGE COMPRESSION ===== */
+function compressImage(dataUrl, maxDim, quality, callback) {
+    var img = new Image();
+    img.onload = function() {
+        var w = img.width, h = img.height;
+        if (w > maxDim || h > maxDim) {
+            if (w > h) { h = Math.round(h * maxDim / w); w = maxDim; }
+            else { w = Math.round(w * maxDim / h); h = maxDim; }
+        }
+        var canvas = document.createElement('canvas'); canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        callback(canvas.toDataURL('image/jpeg', quality));
+    };
+    img.onerror = function() { callback(dataUrl); };
+    img.src = dataUrl;
+}
+
+/* ===== VISITOR TRACKING ===== */
+function updateVisitorCount() {
+    var now = Date.now(), wm = 120000;
+    try {
+        var vc = JSON.parse(localStorage.getItem('ndesanjo_visitors')) || [];
+        vc = vc.filter(function(t) { return now - t.t < wm; });
+        var fid = currentUser || 'anon', found = false;
+        for (var i = 0; i < vc.length; i++) { if (vc[i].id === fid) { found = true; vc[i].t = now; vc[i].name = currentUser || 'Anonymous'; break; } }
+        if (!found) vc.push({ id: fid, name: currentUser || 'Anonymous', t: now });
+        localStorage.setItem('ndesanjo_visitors', JSON.stringify(vc));
+        document.getElementById('visitorCount').textContent = vc.length;
+    } catch(e) { document.getElementById('visitorCount').textContent = '1'; }
+}
+updateVisitorCount(); setInterval(updateVisitorCount, 30000);
 
 /* ===== ADMIN PANEL ===== */
-function openAdminPanel(){
-    if(!isAdminUser()){return;}
-    renderAdminPanel();
-    document.getElementById('adminBackdrop').classList.add('show');
-    document.body.style.overflow='hidden';
-}
-function closeAdmin(e){if(e.target===e.currentTarget)closeAdminForce();}
-function closeAdminForce(){document.getElementById('adminBackdrop').classList.remove('show');document.body.style.overflow='';}
-
-function renderAdminPanel(){
-    /* Online users */
-    var onlineHtml='';
-    try{
-        var vc=JSON.parse(localStorage.getItem('ndesanjo_visitors'))||[];
-        var banned=getBanned();
-        var bannedNames={};for(var b=0;b<banned.length;b++)bannedNames[b[b].name.toLowerCase()]=true;
-        var users=getUsers();var userNames={};for(var u=0;u<users.length;u++)userNames[users[u].name.toLowerCase()]=true;
-        var seen={};
-        for(var i=0;i<vc.length;i++){
-            var v=vc[i];
-            if(seen[v.id])continue;seen[v.id]=true;
-            var isBanned=bannedNames[v.name?v.name.toLowerCase():false;
-            var isUser=userNames[v.name?v.name.toLowerCase():false;
-            var initial=isUser?v.name.charAt(0).toUpperCase():'?';
-            var tagHtml='';
-            if(isBanned)tagHtml='<span class="banned-tag">BANNED</span>';
-            else if(isUser&&v.name.substring(0,3)==='000')tagHtml='<span class="admin-tag">ADMIN</span>';
-            onlineHtml+='<div class="admin-user-row'+(isBanned?' banned-row':'')+'"><div class="admin-user-avatar'+(isBanned?' banned-avatar':'')+'">'+initial+'</div><div class="admin-user-info"><div class="admin-user-name">'+escHtml(v.name||'Anonymous')+tagHtml+'</div><div class="admin-user-time">Active now</div></div><div class="admin-user-actions">'+(isBanned?'<button class="admin-btn-sm unban-btn" onclick="unbanUser(\''+escAttr(v.name)+'\')" title="Unban"><i class="fa-solid fa-lock-open"></i></button>':'<button class="admin-btn-sm ban-btn" onclick="banUser(\''+escAttr(v.name)+'\')" title="Ban"><i class="fa-solid fa-ban"></i></button>')+'</div></div>';
+function openAdminPanel() { if (!isAdminUser()) return; renderAdminPanel(); document.getElementById('adminBackdrop').classList.add('show'); document.body.style.overflow = 'hidden'; }
+function closeAdmin(e) { if (e.target === e.currentTarget) closeAdminForce(); }
+function closeAdminForce() { document.getElementById('adminBackdrop').classList.remove('show'); document.body.style.overflow = ''; }
+function renderAdminPanel() {
+    var onlineHtml = '';
+    try {
+        var vc = JSON.parse(localStorage.getItem('ndesanjo_visitors')) || [];
+        var banned = getBanned(), bannedNames = {};
+        for (var bi = 0; bi < banned.length; bi++) bannedNames[banned[bi].name.toLowerCase()] = true;
+        var users = getUsers(), userNames = {};
+        for (var u = 0; u < users.length; u++) userNames[users[u].name.toLowerCase()] = true;
+        var seen = {};
+        for (var i = 0; i < vc.length; i++) {
+            var v = vc[i]; if (seen[v.id]) continue; seen[v.id] = true;
+            var isBanned = v.name ? bannedNames[v.name.toLowerCase()] : false;
+            var isUser = v.name ? userNames[v.name.toLowerCase()] : false;
+            var userPhoto = v.name ? getUserPhoto(v.name) : '';
+            var avatarInner = userPhoto ? '<img src="' + userPhoto + '">' : (isUser ? v.name.charAt(0).toUpperCase() : '?');
+            var tagHtml = '';
+            if (isBanned) tagHtml = '<span class="banned-tag">BANNED</span>';
+            else if (isUser && v.name.substring(0, 3) === '000') tagHtml = '<span class="admin-tag">ADMIN</span>';
+            var actionBtn = isBanned
+                ? '<button class="admin-btn-sm unban-btn" onclick="unbanUser(\'' + escAttr(v.name) + '\')" title="Unban"><i class="fa-solid fa-lock-open"></i></button>'
+                : '<button class="admin-btn-sm ban-btn" onclick="banUser(\'' + escAttr(v.name) + '\')" title="Ban"><i class="fa-solid fa-ban"></i></button>';
+            onlineHtml += '<div class="admin-user-row"><div class="admin-user-avatar' + (isBanned ? ' banned-avatar' : '') + '">' + avatarInner + '</div><div class="admin-user-info"><div class="admin-user-name">' + escHtml(getUserDisplayName(v.name || 'Anonymous')) + tagHtml + '</div><div class="admin-user-time">Active now</div></div><div class="admin-user-actions">' + actionBtn + '</div></div>';
         }
-    }catch(e){onlineHtml='<div class="admin-empty">Unable to load data</div>';}
-    document.getElementById('adminOnlineList').innerHTML=onlineHtml;
-
-    /* Banned users */
-    var bannedHtml='';
-    var banned=getBanned();
-    if(banned.length===0){bannedHtml='<div class="admin-empty">No banned users</div>';}
-    else{for(var j=0;j<banned.length;j++){
-        var bn=banned[j];
-        bannedHtml+='<div class="admin-user-row"><div class="admin-user-avatar banned-avatar"><i class="fa-solid fa-user-slash" style="font-size:12px;"></i></div><div class="admin-user-info"><div class="admin-user-name">'+escHtml(bn.name)+'<span class="banned-tag">BANNED</span></div><div class="admin-user-time">Since '+new Date(bn.time).toLocaleDateString()+'</div></div><div class="admin-user-actions"><button class="admin-btn-sm unban-btn" onclick="unbanUser(\''+escAttr(bn.name)+'\')" title="Unban"><i class="fa-solid fa-lock-open"></i></button></div></div>';
-    }
-    document.getElementById('adminBannedList').innerHTML=bannedHtml;
+    } catch(e) { onlineHtml = '<div class="admin-empty">Unable to load data</div>'; }
+    if (!onlineHtml) onlineHtml = '<div class="admin-empty">No online users</div>';
+    document.getElementById('adminOnlineList').innerHTML = onlineHtml;
+    var bannedHtml = '', bannedList = getBanned();
+    if (bannedList.length === 0) { bannedHtml = '<div class="admin-empty">No banned users</div>'; }
+    else { for (var j = 0; j < bannedList.length; j++) { var bn = bannedList[j]; bannedHtml += '<div class="admin-user-row"><div class="admin-user-avatar banned-avatar"><i class="fa-solid fa-user-slash" style="font-size:12px;"></i></div><div class="admin-user-info"><div class="admin-user-name">' + escHtml(bn.name) + '<span class="banned-tag">BANNED</span></div><div class="admin-user-time">Since ' + new Date(bn.time).toLocaleDateString() + '</div></div><div class="admin-user-actions"><button class="admin-btn-sm unban-btn" onclick="unbanUser(\'' + escAttr(bn.name) + '\')" title="Unban"><i class="fa-solid fa-lock-open"></i></button></div></div>'; } }
+    document.getElementById('adminBannedList').innerHTML = bannedHtml;
 }
-
-function escAttr(s){return s.replace(/'/g,'&#39;').replace(/"/g,'&quot;');}
-function escHtml(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
-
-function banUser(name){
-    if(!isAdminUser())return;
-    var banned=getBanned();
-    for(var i=0;i<banned.length;i++){if(banned[i].name.toLowerCase()===name.toLowerCase()){showToast(name+' is already banned');return;}}
-    banned.push({name:name,time:Date.now()});
-    saveBanned(banned);
-    /* Remove from visitors */
-    try{var vc=JSON.parse(localStorage.getItem('ndesanjo_visitors'))||[];vc=vc.filter(function(v){return v.name.toLowerCase()!==name.toLowerCase();});localStorage.setItem('ndesanjo_visitors',JSON.stringify(vc));}catch(e){}
-    renderAdminPanel();render();
-    showToast(name+' has been banned');
+function banUser(name) {
+    if (!isAdminUser()) return;
+    var banned = getBanned();
+    for (var i = 0; i < banned.length; i++) { if (banned[i].name.toLowerCase() === name.toLowerCase()) { showToast(name + ' is already banned'); return; } }
+    banned.push({ name: name, time: Date.now() }); saveBanned(banned);
+    try { var vc = JSON.parse(localStorage.getItem('ndesanjo_visitors')) || []; vc = vc.filter(function(v) { return !v.name || v.name.toLowerCase() !== name.toLowerCase(); }); localStorage.setItem('ndesanjo_visitors', JSON.stringify(vc)); } catch(e) {}
+    renderAdminPanel(); render(); showToast(name + ' has been banned');
 }
-
-function unbanUser(name){
-    if(!isAdminUser())return;
-    var banned=getBanned();
-    var newBanned=banned.filter(function(b){return b.name.toLowerCase()!==name.toLowerCase();});
-    saveBanned(newBanned);
-    renderAdminPanel();render();
-    showToast(name+' has been unbanned');
+function unbanUser(name) {
+    if (!isAdminUser()) return;
+    saveBanned(getBanned().filter(function(b) { return b.name.toLowerCase() !== name.toLowerCase(); }));
+    renderAdminPanel(); render(); showToast(name + ' has been unbanned');
 }
 
 /* ===== TRANSLATION ===== */
-function translateText(text){if(!text||text.trim()==='')return text;var key=text.trim().toLowerCase();if(currentLang==='en')return text;if(translationCache[key])return translationCache[key];return text;}
-function translateTextAsync(text){return new Promise(function(resolve){if(!text||text.trim()==='')return resolve(text);var key=text.trim().toLowerCase();if(currentLang==='en')return resolve(text);if(translationCache[key])return resolve(translationCache[key]);fetch('https://api.mymemory.translated.net/get?q='+encodeURIComponent(text)+'&langpair=en|sw').then(function(r){return r.json();}).then(function(data){if(data.responseStatus===200&&data.responseData&&data.responseData.translatedText){var tr=data.responseData.translatedText;translationCache[key]=tr;try{var s=JSON.stringify(translationCache);if(s.length<2000000)localStorage.setItem('ndesanjo_translations',s);}catch(e){}resolve(tr);}else resolve(text);}).catch(function(){resolve(text);});});}
-async function translateAllTexts(){if(currentLang==='en')return;var all=[],seen={};for(var i=0;i<recipes.length;i++){var r=recipes[i],tk=r.title.toLowerCase();if(!seen[tk]){seen[tk]=true;all.push(r.title);}for(var j=0;j<r.ingredients.length;j++){var ik=r.ingredients[j].toLowerCase();if(!seen[ik]){seen[ik]=true;all.push(r.ingredients[j]);}}for(var k=0;k<r.instructions.length;k++){var jk=r.instructions[k].toLowerCase();if(!seen[jk]){seen[jk]=true;all.push(r.instructions[k]);}for(var c=0;c<(r.comments||[]).length;c++){var ct=(r.comments[c].text||'').toLowerCase();if(ct&&!seen[ct]){seen[ct]=true;all.push(r.comments[c].text);}}}for(var b=0;b<all.length;b+=5){var batch=all.slice(b,b+5),promises=[];for(var p=0;p<batch.length;p++)promises.push(translateTextAsync(batch[p]));await Promise.all(promises);}}
-function tx(text){return translateText(text);}
-function txCat(cat){var m={Breakfast:{en:'Breakfast',sw:'Kiamsha Kinywa'},Lunch:{en:'Lunch',sw:'Chakula cha Mchana'},Dinner:{en:'Dinner',sw:'Chakula cha Jioni'},Dessert:{en:'Dessert',sw:'Tamu'}};return(m[cat]&&m[cat][currentLang])||cat;}
+function translateText(text) { if (!text || text.trim() === '') return text; var key = text.trim().toLowerCase(); if (currentLang === 'en') return text; if (translationCache[key]) return translationCache[key]; return text; }
+function translateTextAsync(text) {
+    return new Promise(function(resolve) {
+        if (!text || text.trim() === '') return resolve(text);
+        var key = text.trim().toLowerCase(); if (currentLang === 'en') return resolve(text); if (translationCache[key]) return resolve(translationCache[key]);
+        fetch('https://api.mymemory.translated.net/get?q=' + encodeURIComponent(text) + '&langpair=en|sw').then(function(r) { return r.json(); }).then(function(data) {
+            if (data.responseStatus === 200 && data.responseData && data.responseData.translatedText) { var tr = data.responseData.translatedText; translationCache[key] = tr; try { var s = JSON.stringify(translationCache); if (s.length < 2000000) localStorage.setItem('ndesanjo_translations', s); } catch(e) {} resolve(tr); } else resolve(text);
+        }).catch(function() { resolve(text); });
+    });
+}
+async function translateAllTexts() {
+    if (currentLang === 'en') return;
+    var all = [], seen = {};
+    for (var i = 0; i < recipes.length; i++) {
+        var r = recipes[i];
+        if (!seen[r.title.toLowerCase()]) { seen[r.title.toLowerCase()] = true; all.push(r.title); }
+        for (var j = 0; j < r.ingredients.length; j++) { if (!seen[r.ingredients[j].toLowerCase()]) { seen[r.ingredients[j].toLowerCase()] = true; all.push(r.ingredients[j]); } }
+        for (var k = 0; k < r.instructions.length; k++) { if (!seen[r.instructions[k].toLowerCase()]) { seen[r.instructions[k].toLowerCase()] = true; all.push(r.instructions[k]); } }
+        for (var c = 0; c < (r.comments || []).length; c++) { var ct = (r.comments[c].text || ''); if (ct && !seen[ct.toLowerCase()]) { seen[ct.toLowerCase()] = true; all.push(ct); } }
+    }
+    for (var b = 0; b < all.length; b += 5) { var batch = all.slice(b, b + 5), promises = []; for (var p = 0; p < batch.length; p++) promises.push(translateTextAsync(batch[p])); await Promise.all(promises); }
+}
+function tx(text) { return translateText(text); }
+function txCat(cat) { var m = { Breakfast:{ en:'Breakfast', sw:'Kiamsha Kinywa' }, Lunch:{ en:'Lunch', sw:'Chakula cha Mchana' }, Dinner:{ en:'Dinner', sw:'Chakula cha Jioni' }, Dessert:{ en:'Dessert', sw:'Tamu' } }; return (m[cat] && m[cat][currentLang]) || cat; }
 
 /* ===== UI STRINGS ===== */
-var ui={search_placeholder:{en:'Search recipes...',sw:'Tafuta mapishi...'},fav_title:{en:'Favorites',sw:'Vipendwa'},saved_label:{en:'saved',sw:'imehifadhiwa'},grid_tab:{en:'GRID',sw:'GRIDI'},list_tab:{en:'LIST',sw:'ORODHA'},all_recipes:{en:'All Recipes',sw:'Mapishi Yote'},favorites_view:{en:'Favorites',sw:'Vipendwa'},recipe_label:{en:'recipe',sw:'mapishi'},recipes_label:{en:'recipes',sw:'mapishi'},new_recipe:{en:'New Recipe',sw:'Mapishi Mpya'},recipe_name:{en:'Recipe Name',sw:'Jina la Mapishi'},name_placeholder:{en:'What are you cooking?',sw:'Unapika nini?'},category:{en:'Category',sw:'Kundi'},ingredients_label:{en:'Ingredients (one per line)',sw:'Viungo (moja kwa kila mstari)'},instructions_label:{en:'Instructions (one per line)',sw:'Maelekezo (moja kwa kila mstari)'},photo:{en:'Photo',sw:'Picha'},tap_upload:{en:'Tap to add a photo',sw:'Bonyeza kuongeza picha'},save_recipe:{en:'Save Recipe',sw:'Hifadhi Mapishi'},update_recipe:{en:'Update Recipe',sw:'Bosha Mapishi'},posted_by:{en:'Posted by',sw:'Imewekwa na'},ndesanjo_family:{en:'Ndesanjo Family',sw:'Familia ya Ndesanjo'},ingredients_title:{en:'Ingredients',sw:'Viungo'},instructions_title:{en:'Instructions',sw:'Maelekezo'},comments_title:{en:'Comments',sw:'Maoni'},comment_placeholder:{en:'Add a comment...',sw:'Ongeza maoni...'},added_fav:{en:'Added to favorites',sw:'Imeongezwa kwenye vipendwa'},removed_fav:{en:'Removed from favorites',sw:'Imeondolewa kwenye vipendwa'},deleted:{en:'Recipe deleted',sw:'Mapishi yamefutwa'},saved_msg:{en:'Recipe saved',sw:'Mapishi yamehifadhiwa'},updated_msg:{en:'Recipe updated',sw:'Mapishi yameboshewa'},empty_title:{en:'No recipes found',sw:'Hakuna mapishi yaliyopatikana'},empty_sub:{en:'Tap + to add your first recipe',sw:'Bonyeza + kuongeza mapishi yako ya kwanza'},saved_indicator:{en:'Saved',sw:'Imehifadhiwa'},confirm_delete:{en:'Delete this recipe?',sw:'Futa mapishi hii?'},storage_full:{en:'Storage full.',sw:'Hifadhi imejaa.'},translating:{en:'Translating...',sw:'Inatafsiri...'},views:{en:'views',sw:'mara kuangaliwa'},likes:{en:'likes',sw:'mapendano'},comments_count:{en:'comments',sw:'maoni'},story_all:{en:'All',sw:'Yote'},story_favorites:{en:'Favorites',sw:'Vipendwa'},story_breakfast:{en:'Breakfast',sw:'Kiamsha\nKinywa'},story_lunch:{en:'Lunch',sw:'Chakula\nMchana'},story_dinner:{en:'Dinner',sw:'Chakula\nJioni'},story_dessert:{en:'Dessert',sw:'Tamu'},banned_msg:{en:'This account has been suspended',sw:'Akaunti hii imefungwa'},already_banned:{en:'Already banned',sw:' tayari imefungwa'},unbanned_msg:{en:' has been unbanned',sw:' ameondolewa'},banned_msg:{en:' has been banned',sw:' amefungwa'},admin_only:{en:'Admin only',sw:'Watu wa admin tu'},you_banned:{en:'You have been banned from this app',sw:'Umefungwa kwenye app hii'},logout:{en:'Logout',sw:'Ondoka'}};
-function t(key){return ui[key]?(ui[key][currentLang]||ui[key].en):key;}
+var ui = {
+    search_placeholder:{ en:'Search recipes...', sw:'Tafuta mapishi...' }, fav_title:{ en:'Favorites', sw:'Vipendwa' },
+    saved_label:{ en:'saved', sw:'imehifadhiwa' }, grid_tab:{ en:'GRID', sw:'GRIDI' }, list_tab:{ en:'LIST', sw:'ORODHA' },
+    all_recipes:{ en:'All Recipes', sw:'Mapishi Yote' }, favorites_view:{ en:'Favorites', sw:'Vipendwa' },
+    recipe_label:{ en:'recipe', sw:'mapishi' }, recipes_label:{ en:'recipes', sw:'mapishi' },
+    new_recipe:{ en:'New Recipe', sw:'Mapishi Mpya' }, recipe_name:{ en:'Recipe Name', sw:'Jina la Mapishi' },
+    name_placeholder:{ en:'What are you cooking?', sw:'Unapika nini?' }, category:{ en:'Category', sw:'Kundi' },
+    ingredients_label:{ en:'Ingredients (one per line)', sw:'Viungo (moja kwa kila mstari)' },
+    instructions_label:{ en:'Instructions (one per line)', sw:'Maelekezo (moja kwa kila mstari)' },
+    photos:{ en:'Photos', sw:'Picha' }, save_recipe:{ en:'Save Recipe', sw:'Hifadhi Mapishi' },
+    update_recipe:{ en:'Update Recipe', sw:'Bosha Mapishi' }, posted_by:{ en:'Posted by', sw:'Imewekwa na' },
+    ndesanjo_family:{ en:'Ndesanjo Family', sw:'Familia ya Ndesanjo' },
+    ingredients_title:{ en:'Ingredients', sw:'Viungo' }, instructions_title:{ en:'Instructions', sw:'Maelekezo' },
+    comments_title:{ en:'Comments', sw:'Maoni' }, comment_placeholder:{ en:'Add a comment...', sw:'Ongeza maoni...' },
+    added_fav:{ en:'Added to favorites', sw:'Imeongezwa kwenye vipendwa' },
+    removed_fav:{ en:'Removed from favorites', sw:'Imeondolewa kwenye vipendwa' },
+    deleted:{ en:'Recipe deleted', sw:'Mapishi yamefutwa' }, saved_msg:{ en:'Recipe saved', sw:'Mapishi yamehifadhiwa' },
+    updated_msg:{ en:'Recipe updated', sw:'Mapishi yameboshewa' },
+    empty_title:{ en:'No recipes found', sw:'Hakuna mapishi yaliyopatikana' },
+    empty_sub:{ en:'Tap + to add your first recipe', sw:'Bonyeza + kuongeza mapishi yako ya kwanza' },
+    saved_indicator:{ en:'Saved', sw:'Imehifadhiwa' }, confirm_delete:{ en:'Delete this recipe?', sw:'Futa mapishi hii?' },
+    storage_full:{ en:'Storage full.', sw:'Hifadhi imejaa.' }, translating:{ en:'Translating...', sw:'Inatafsiri...' },
+    views:{ en:'views', sw:'mara kuangaliwa' }, likes:{ en:'likes', sw:'mapendano' },
+    comments_count:{ en:'comments', sw:'maoni' }, story_all:{ en:'All', sw:'Yote' },
+    story_favorites:{ en:'Favorites', sw:'Vipendwa' }, story_breakfast:{ en:'Breakfast', sw:'Kiamsha Kinywa' },
+    story_lunch:{ en:'Lunch', sw:'Chakula Mchana' }, story_dinner:{ en:'Dinner', sw:'Chakula Jioni' },
+    story_dessert:{ en:'Dessert', sw:'Tamu' }, link_copied:{ en:'Link copied!', sw:'Kiungo imenakiliwa!' },
+    share_text:{ en:'Check out this recipe:', sw:'Angalia mapishi hii:' }
+};
+function t(key) { return ui[key] ? (ui[key][currentLang] || ui[key].en) : key; }
 
 /* ===== PERSISTENCE ===== */
-function save(){try{localStorage.setItem('ndesanjo_recipes',JSON.stringify(recipes));showSaveIndicator();}catch(e){showToast(t('storage_full'));}}
-function showSaveIndicator(){var el=document.getElementById('saveIndicator');document.getElementById('savedText').textContent=t('saved_indicator');el.classList.add('show');clearTimeout(saveTimeout);saveTimeout=setTimeout(function(){el.classList.remove('show');},1800);}
+function save() { try { localStorage.setItem('ndesanjo_recipes', JSON.stringify(recipes)); showSaveIndicator(); } catch(e) { showToast(t('storage_full')); } }
+function showSaveIndicator() { var el = document.getElementById('saveIndicator'); document.getElementById('savedText').textContent = t('saved_indicator'); el.classList.add('show'); clearTimeout(saveTimeout); saveTimeout = setTimeout(function() { el.classList.remove('show'); }, 1800); }
 
 /* ===== LANGUAGE TOGGLE ===== */
-var isTranslating=false;
-async function toggleLang(){if(isTranslating)return;isTranslating=true;currentLang=currentLang==='en'?'sw':'en';document.getElementById('langLabel').textContent=currentLang==='en'?'SW':'EN';try{localStorage.setItem('ndesanjo_lang',currentLang);}catch(e){}updateUIStrings();renderStories();if(currentLang==='sw'){document.getElementById('langLoadingText').textContent=t('translating');document.getElementById('langLoading').classList.add('show');document.getElementById('langBtn').style.opacity='0.5';document.getElementById('langBtn').style.pointerEvents='none';try{await translateAllTexts();}catch(e){}document.getElementById('langLoading').classList.remove('show');document.getElementById('langBtn').style.opacity='';document.getElementById('langBtn').style.pointerEvents='';}render();if(viewingIndex>=0)openView(viewingIndex);isTranslating=false;}
+var isTranslating = false;
+async function toggleLang() {
+    if (isTranslating) return; isTranslating = true;
+    currentLang = currentLang === 'en' ? 'sw' : 'en';
+    document.getElementById('langLabel').textContent = currentLang === 'en' ? 'SW' : 'EN';
+    try { localStorage.setItem('ndesanjo_lang', currentLang); } catch(e) {}
+    updateUIStrings(); renderStories();
+    if (currentLang === 'sw') {
+        document.getElementById('langLoadingText').textContent = t('translating');
+        document.getElementById('langLoading').classList.add('show');
+        document.getElementById('langBtn').style.opacity = '0.5'; document.getElementById('langBtn').style.pointerEvents = 'none';
+        try { await translateAllTexts(); } catch(e) {}
+        document.getElementById('langLoading').classList.remove('show');
+        document.getElementById('langBtn').style.opacity = ''; document.getElementById('langBtn').style.pointerEvents = '';
+    }
+    render(); if (viewingIndex >= 0) openView(viewingIndex); isTranslating = false;
+}
+function updateUIStrings() {
+    document.getElementById('search').placeholder = t('search_placeholder');
+    document.getElementById('favTitle').textContent = t('fav_title');
+    document.getElementById('tabGrid').textContent = t('grid_tab');
+    document.getElementById('tabList').textContent = t('list_tab');
+    document.getElementById('sectionTitle').textContent = getViewTitle();
+    document.getElementById('addHeader').childNodes[0].textContent = '\n    ' + t('new_recipe') + '\n    ';
+    document.getElementById('lblName').textContent = t('recipe_name');
+    document.getElementById('fTitle').placeholder = t('name_placeholder');
+    document.getElementById('lblCat').textContent = t('category');
+    document.getElementById('lblIng').textContent = t('ingredients_label');
+    document.getElementById('lblInst').textContent = t('instructions_label');
+    document.getElementById('lblPhoto').textContent = t('photos');
+    document.getElementById('lblAuthor').textContent = t('posted_by');
+    document.getElementById('fAuthor').value = currentUser || '';
+    document.getElementById('submitBtn').textContent = document.getElementById('editIndex').value === '' ? t('save_recipe') : t('update_recipe');
+    var sel = document.getElementById('fCategory'), sv = sel.value;
+    for (var i = 0; i < sel.options.length; i++) sel.options[i].textContent = txCat(catValues[i]);
+    sel.value = sv;
+}
+function getViewTitle() { return t('all_recipes'); }
 
-function updateUIStrings(){document.getElementById('search').placeholder=t('search_placeholder');document.getElementById('favTitle').textContent=t('fav_title');document.getElementById('tabGrid').textContent=t('grid_tab');document.getElementById('tabList').textContent=t('list_tab');document.getElementById('sectionTitle').textContent=getViewTitle();document.getElementById('addHeader').firstChild.textContent=t('new_recipe')+'\n            ';document.getElementById('lblName').textContent=t('recipe_name');document.getElementById('fTitle').placeholder=t('name_placeholder');document.getElementById('lblCat').textContent=t('category');document.getElementById('lblIng').textContent=t('ingredients_label');document.getElementById('lblInst').textContent=t('instructions_label');document.getElementById('lblPhoto').textContent=t('photo');document.getElementById('uploadText').textContent=t('tap_upload');document.getElementById('lblAuthor').textContent=t('posted_by');document.getElementById('fAuthor').value=currentUser||'';document.getElementById('submitBtn').textContent=document.getElementById('editIndex').value===''?t('save_recipe'):t('update_recipe');var sel=document.getElementById('fCategory'),sv=sel.value;for(var i=0;i<sel.options.length;i++)sel.options[i].textContent=txCat(catValues[i]);sel.value=sv;}
-function getViewTitle(){var m={all:'all_recipes',Favorites:'favorites_view',Breakfast:'breakfast',Lunch:'lunch',Dinner:'dinner',Dessert:'dessert'};return t(m[currentView]||'all_recipes');}
+function renderStories() {
+    var cats = ['all', 'Favorites', 'Breakfast', 'Lunch', 'Dinner', 'Dessert'];
+    var lk = ['story_all', 'story_favorites', 'story_breakfast', 'story_lunch', 'story_dinner', 'story_dessert'];
+    var h = '';
+    for (var i = 0; i < cats.length; i++) { var a = currentView === cats[i] ? ' active' : ''; h += '<div class="story' + a + '" onclick="setView(\'' + cats[i] + '\')"><div class="story-ring"><div class="story-ring-inner">' + categoryIcons[cats[i]] + '</div></div><div class="story-label">' + t(lk[i]) + '</div></div>'; }
+    document.getElementById('stories').innerHTML = h;
+}
+function setView(v) { currentView = v; document.getElementById('sectionTitle').textContent = getViewTitle(); renderStories(); render(); }
+function setTab(tab, el) { currentTab = tab; var tabs = document.querySelectorAll('.tab'); for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('active'); el.classList.add('active'); render(); }
 
-function renderStories(){var cats=['all','Favorites','Breakfast','Lunch','Dinner','Dessert'],lk=['story_all','story_favorites','story_breakfast','story_lunch','story_dinner','story_dessert'],h='';for(var i=0;i<cats.length;i++){var a=currentView===cats[i]?' active':'',lt=t(lk[i]).replace(/\n/g,'<br>');h+='<div class="story'+a+'" onclick="setView(\''+cats[i]+'\')"><div class="story-ring"><div class="story-ring-inner">'+categoryIcons[cats[i]]+'</div></div><div class="story-label">'+lt+'</div></div>';}document.getElementById('stories').innerHTML=h;}
-
-function setView(v){currentView=v;document.getElementById('sectionTitle').textContent=getViewTitle();renderStories();render();}
-function setTab(tab,el){currentTab=tab;var tabs=document.querySelectorAll('.tab');for(var i=0;i<tabs.length;i++)tabs[i].classList.remove('active');el.classList.add('active');render();}
-
-/* ===== FILTERING (excludes banned users' recipes) ===== */
-function getFiltered(){
-    var q=document.getElementById('search').value.toLowerCase().trim(),res=[];
-    var banned=getBanned();
-    var bannedNames={};for(var bi=0;bi<banned.length;bi++)bannedNames[banned[bi].name.toLowerCase()]=true;
-    for(var i=0;i<recipes.length;i++){
-        var r=recipes[i],en=r.title.toLowerCase(),sw=tx(r.title).toLowerCase();
-        if(q&&en.indexOf(q)===-1&&sw.indexOf(q)===-1)continue;
-        if(currentView==='Favorites'&&!r.fav)continue;
-        if(currentView!=='all'&&currentView!=='Favorites'&&r.category!==currentView)continue;
-        /* Hide banned users' recipes from everyone except admins */
-        if(!isAdminUser()&&r.ownerId&&bannedNames[r.ownerId]){continue;}
-        var c={};for(var k in r)c[k]=r[k];c._i=i;res.push(c);
+function getFiltered() {
+    var q = document.getElementById('search').value.toLowerCase().trim(), res = [];
+    var banned = getBanned(), bannedNames = {};
+    for (var bi = 0; bi < banned.length; bi++) bannedNames[banned[bi].name.toLowerCase()] = true;
+    for (var i = 0; i < recipes.length; i++) {
+        var r = recipes[i];
+        if (q && r.title.toLowerCase().indexOf(q) === -1 && tx(r.title).toLowerCase().indexOf(q) === -1) continue;
+        if (currentView === 'Favorites' && !r.fav) continue;
+        if (currentView !== 'all' && currentView !== 'Favorites' && r.category !== currentView) continue;
+        if (!isAdminUser() && r.ownerId && bannedNames[r.ownerId]) continue;
+        var c = {}; for (var k in r) c[k] = r[k]; c._i = i; res.push(c);
     }
     return res;
 }
 
-function formatNum(n){if(n>=1000)return(n/1000).toFixed(1)+'k';return n;}
+function getRecipeFirstImage(r) { return (r.images && r.images.length > 0) ? r.images[0] : (r.image || ''); }
+function getRecipeImageCount(r) { return (r.images ? r.images.length : 0) + (r.image && (!r.images || r.images.length === 0) ? 1 : 0); }
 
-function render(){
-    var filtered=getFiltered(),rl=filtered.length===1?t('recipe_label'):t('recipes_label');
-    document.getElementById('sectionCount').textContent=filtered.length+' '+rl;
-    var favs=[];for(var f=0;f<recipes.length;f++){if(recipes[f].fav)favs.push(recipes[f]);}
-    var fs=document.getElementById('favSection');
-    if(favs.length>0&&currentView!=='Favorites'){fs.style.display='block';document.getElementById('favCount').textContent=favs.length+' '+t('saved_label');var fh='';for(var fi=0;fi<favs.length;fi++){var fr=favs[fi],fidx=recipes.indexOf(fr);if(!fr)continue;var ip=fr.image?'<img class="fav-card-img" src="'+fr.image+'" loading="lazy">':'<div class="fav-card-placeholder">'+getCatEmoji(fr.category)+'</div>';fh+='<div class="fav-card" onclick="openView('+fidx+')">'+ip+'<div class="fav-card-body"><div class="fav-card-title">'+tx(fr.title)+'</div><div class="fav-card-cat">'+txCat(fr.category)+'</div></div></div>';}document.getElementById('favRow').innerHTML=fh;}else{fs.style.display='none';}
-    var main=document.getElementById('mainContent');
-    if(filtered.length===0){main.innerHTML='<div class="empty-state"><i class="fa-solid fa-bowl-rice"></i><p>'+t('empty_title')+'</p><span>'+t('empty_sub')+'</span></div>';return;}
-    if(currentTab==='grid'){var gh='<div class="recipe-grid">';for(var gi=0;gi<filtered.length;gi++){var gr=filtered[gi],gimg=gr.image?'<img src="'+gr.image+'" loading="lazy">':'<div class="grid-placeholder"><i class="fa-solid fa-utensils"></i>'+tx(gr.title)+'</div>';gh+='<div class="grid-item" onclick="openView('+gr._i+')">'+gimg+'<div class="grid-overlay"><div class="grid-stat"><i class="fa-solid fa-eye"></i>'+formatNum(gr.views||0)+'</div><div class="grid-stat"><i class="fa-solid fa-heart"></i>'+formatNum(gr.likes||0)+'</div><div class="grid-stat"><i class="fa-solid fa-comment"></i>'+formatNum((gr.comments||[]).length)+'</div></div></div></div>';}gh+='</div>';main.innerHTML=gh;}
-    else{var lh='';for(var li=0;li<filtered.length;li++){var lr=filtered[li],lt=lr.image?'<img class="list-thumb" src="'+lr.image+'" loading="lazy">':'<div class="list-thumb-placeholder">'+getCatEmoji(lr.category)+'</div>',ling='';for(var lii=0;lii<Math.min(3,lr.ingredients.length);lii++){if(lii>0)ling+=', ';ling+=tx(lr.ingredients[lii]);}if(lr.ingredients.length>3)ling+=' ...';lh+='<div class="list-card" onclick="openView('+lr._i+')"><div class="list-inner">'+lt+'<div class="list-body"><div class="list-title">'+tx(lr.title)+'</div><div class="list-cat">'+txCat(lr.category)+'</div><div class="list-desc">'+ling+'</div><div class="list-stats"><span><i class="fa-solid fa-eye"></i>'+formatNum(lr.views||0)+'</span><span><i class="fa-solid fa-heart"></i>'+formatNum(lr.likes||0)+'</span><span><i class="fa-solid fa-comment"></i>'+formatNum((lr.comments||[]).length)+'</span></div></div></div></div>';}main.innerHTML=lh;}}
+function render() {
+    var filtered = getFiltered();
+    var rl = filtered.length === 1 ? t('recipe_label') : t('recipes_label');
+    document.getElementById('sectionCount').textContent = filtered.length + ' ' + rl;
+    var favs = [];
+    for (var f = 0; f < recipes.length; f++) { if (recipes[f].fav) favs.push({ r: recipes[f], idx: f }); }
+    var fs = document.getElementById('favSection');
+    if (favs.length > 0 && currentView !== 'Favorites') {
+        fs.style.display = 'block';
+        document.getElementById('favCount').textContent = favs.length + ' ' + t('saved_label');
+        var fh = '';
+        for (var fi = 0; fi < favs.length; fi++) {
+            var fr = favs[fi].r, fidx = favs[fi].idx;
+            var img = getRecipeFirstImage(fr);
+            var ip = img ? '<img class="fav-card-img" src="' + img + '" loading="lazy">' : '<div class="fav-card-placeholder">' + getCatEmoji(fr.category) + '</div>';
+            fh += '<div class="fav-card" onclick="openView(' + fidx + ')">' + ip + '<div class="fav-card-body"><div class="fav-card-title">' + tx(fr.title) + '</div><div class="fav-card-cat">' + txCat(fr.category) + '</div></div></div>';
+        }
+        document.getElementById('favRow').innerHTML = fh;
+    } else { fs.style.display = 'none'; }
+    var main = document.getElementById('mainContent');
+    if (filtered.length === 0) { main.innerHTML = '<div class="empty-state"><i class="fa-solid fa-bowl-rice"></i><p>' + t('empty_title') + '</p><span>' + t('empty_sub') + '</span></div>'; return; }
+    if (currentTab === 'grid') {
+        var gh = '<div class="recipe-grid">';
+        for (var gi = 0; gi < filtered.length; gi++) {
+            var gr = filtered[gi]; var img = getRecipeFirstImage(gr); var imgCount = getRecipeImageCount(gr);
+            var gimg = img ? '<img src="' + img + '" loading="lazy">' : '<div class="grid-placeholder"><i class="fa-solid fa-utensils"></i>' + tx(gr.title) + '</div>';
+            var dotsHtml = imgCount > 1 ? '<div class="grid-gallery-dots">' + '<div class="grid-gallery-dot"></div>'.repeat(Math.min(imgCount, 4)) + '</div>' : '';
+            gh += '<div class="grid-item" onclick="openView(' + gr._i + ')">' + gimg + dotsHtml + '<div class="grid-overlay"><div class="grid-stat"><i class="fa-solid fa-eye"></i>' + formatNum(gr.views || 0) + '</div><div class="grid-stat"><i class="fa-solid fa-heart"></i>' + formatNum(gr.likes || 0) + '</div><div class="grid-stat"><i class="fa-solid fa-comment"></i>' + formatNum((gr.comments || []).length) + '</div></div></div>';
+        }
+        gh += '</div>'; main.innerHTML = gh;
+    } else {
+        var lh = '';
+        for (var li = 0; li < filtered.length; li++) {
+            var lr = filtered[li]; var limg = getRecipeFirstImage(lr); var limgCount = getRecipeImageCount(lr);
+            var lt = limg ? '<img class="list-thumb" src="' + limg + '" loading="lazy">' : '<div class="list-thumb-placeholder">' + getCatEmoji(lr.category) + '</div>';
+            var ling = '';
+            for (var lii = 0; lii < Math.min(3, lr.ingredients.length); lii++) { if (lii > 0) ling += ', '; ling += tx(lr.ingredients[lii]); }
+            if (lr.ingredients.length > 3) ling += ' ...';
+            var badgeHtml = limgCount > 1 ? '<div class="list-gallery-badge"><i class="fa-solid fa-images"></i> ' + limgCount + '</div>' : '';
+            lh += '<div class="list-card" onclick="openView(' + lr._i + ')" style="position:relative;">' + lt + '<div class="list-body"><div class="list-title">' + tx(lr.title) + '</div><div class="list-cat">' + txCat(lr.category) + '</div><div class="list-desc">' + ling + '</div><div class="list-stats"><span><i class="fa-solid fa-eye"></i>' + formatNum(lr.views || 0) + '</span><span><i class="fa-solid fa-heart"></i>' + formatNum(lr.likes || 0) + '</span><span><i class="fa-solid fa-comment"></i>' + formatNum((lr.comments || []).length) + '</span></div></div>' + badgeHtml + '</div>';
+        }
+        main.innerHTML = lh;
+    }
+}
+
+/* ===== GALLERY IN VIEW MODAL ===== */
+function getAllImages(r) {
+    var imgs = [];
+    if (r.images && r.images.length > 0) { for (var i = 0; i < r.images.length; i++) imgs.push(r.images[i]); }
+    if (r.image && imgs.indexOf(r.image) === -1) imgs.unshift(r.image);
+    return imgs;
+}
+function renderModalGallery(imgs, slideIdx) {
+    var el = document.getElementById('modalImage');
+    if (imgs.length === 0) { el.innerHTML = '<div class="modal-gallery-main-placeholder">' + getCatEmoji(recipes[viewingIndex].category) + '</div>'; return; }
+    if (imgs.length === 1) {
+        el.innerHTML = '<img class="modal-gallery-main" src="' + imgs[0] + '">';
+        return;
+    }
+    var navClass = imgs.length > 1 ? ' visible' : '';
+    var dotsHtml = '';
+    for (var d = 0; d < imgs.length; d++) dotsHtml += '<button class="modal-gallery-dot' + (d === slideIdx ? ' active' : '') + '" onclick="slideGallery(' + d + ')"></button>';
+    el.innerHTML = '<img class="modal-gallery-main" src="' + imgs[slideIdx] + '" style="transition:opacity .3s;">'
+        + '<button class="modal-gallery-nav modal-gallery-prev' + navClass + '" onclick="slideGallery(' + ((slideIdx - 1 + imgs.length) % imgs.length) + ')"><i class="fa-solid fa-chevron-left"></i></button>'
+        + '<button class="modal-gallery-nav modal-gallery-next' + navClass + '" onclick="slideGallery(' + ((slideIdx + 1) % imgs.length) + ')"><i class="fa-solid fa-chevron-right"></i></button>'
+        + '<div class="modal-gallery-dots">' + dotsHtml + '</div>'
+        + '<div class="modal-gallery-count">' + (slideIdx + 1) + ' / ' + imgs.length + '</div>';
+}
+function slideGallery(idx) {
+    var r = recipes[viewingIndex]; if (!r) return;
+    var imgs = getAllImages(r);
+    currentGallerySlide = idx;
+    var mainImg = document.querySelector('.modal-gallery-main');
+    if (mainImg) { mainImg.style.opacity = '0'; setTimeout(function() { renderModalGallery(imgs, idx); }, 150); }
+}
 
 /* ===== VIEW MODAL ===== */
-function openView(i){viewingIndex=i;var r=recipes[i];if(!r.views)r.views=0;r.views++;save();document.getElementById('modalAvatar').textContent=getCatEmoji(r.category);document.getElementById('modalCat').textContent=txCat(r.category);document.getElementById('modalUser').textContent=r.author||t('ndesanjo_family');document.getElementById('modalImage').innerHTML=r.image?'<img src="'+r.image+'">':'<div class="modal-image-placeholder">'+getCatEmoji(r.category)+'</div>';var ih='';for(var ii=0;ii<r.ingredients.length;ii++)ih+='<li><span class="ing-dot"></span>'+tx(r.ingredients[ii])+'</li>';var jh='';for(var ij=0;ij<r.instructions.length;ij++)jh+='<li>'+tx(r.instructions[ij])+'</li>';document.getElementById('modalBody').innerHTML='<div class="modal-title">'+tx(r.title)+'</div><div class="modal-section-label">'+t('ingredients_title')+'</div><ul class="modal-ingredients">'+ih+'</ul><div class="modal-section-label">'+t('instructions_title')+'</div><ol class="modal-instructions">'+jh+'</ol>';document.getElementById('modalStats').innerHTML='<span><i class="fa-solid fa-eye"></i> '+formatNum(r.views)+' '+t('views')+'</span><span><i class="fa-solid fa-heart"></i> '+formatNum(r.likes||0)+' '+t('likes')+'</span><span><i class="fa-solid fa-comment"></i> '+formatNum((r.comments||[]).length)+' '+t('comments_count')+'</span>';var isOwner=r.ownerId&&r.ownerId===currentUser;var isAdm=isAdminUser();var hc=r.fav?' liked':'',hi=r.fav?'fa-solid':'fa-regular';var fh='<button class="modal-action-btn'+hc+'" onclick="toggleFav('+i+')" aria-label="Favorite"><i class="'+hi+' fa-heart"></i></button>';
-if(isOwner||isAdm){fh+='<button class="modal-action-btn" onclick="editRecipe('+i+')" aria-label="Edit"><i class="fa-regular fa-pen-to-square"></i></button><span class="modal-action-spacer"></span><button class="modal-action-btn delete-btn" onclick="deleteRecipe('+i+')" aria-label="Delete"><i class="fa-regular fa-trash-can"></i></button>';}
-else{fh+='<span class="modal-action-spacer"></span>';}
-document.getElementById('modalFooter').innerHTML=fh;renderComments(i);document.getElementById('viewModal').classList.add('show');document.body.style.overflow='hidden';}
+function openView(i) {
+    viewingIndex = i; var r = recipes[i]; if (!r) return;
+    if (!r.views) r.views = 0; r.views++; save();
+    currentGallerySlide = 0;
 
-function renderComments(i){var r=recipes[i];if(!r.comments)r.comments=[];var sec=document.getElementById('commentsSection');var listHtml='';if(r.comments.length===0){listHtml='<div class="no-comments">'+t('comment_placeholder')+'</div>';}else{for(var c=0;c<r.comments.length;c++){var cm=r.comments[c],initial=cm.name?cm.name.charAt(0).toUpperCase():'?';listHtml+='<div class="comment-item"><div class="comment-avatar">'+escHtml(initial)+'</div><div class="comment-body"><div class="comment-name">'+escHtml(cm.name)+'</div><div class="comment-text">'+escHtml(cm.text)+'</div><div class="comment-time">'+timeAgo(cm.time)+'</div></div></div>';}}var emojis='😀😃😄😁😆😅🤣😂🙂😉😊😇🥰😍🤩😘😗😚😙🥲😋😛😜🤪😝🤑🤗🤭🤫🤔🫣🤐🤨😐😑😶🫥😏😒🙄😬🤥😌😔😪🤤�😴😷🤒🤕🤢🤮🥴😵🤯🤠🥳🥸😎🤓🧐😕🫤�😟🙁☹️😮😯😲😳🥺🥹😦😧😨😰😥😢😭😱😖😣😞😓😩😫🥱😤😡😠🤬😈👿💀☠️💩🤡👹👺👻👽👾🤖😺😸😹😻😼😽🙀😿😾🙈🙉🙊💋🫂💌💘💝💖💗💓💞💕💟❣️💔❤️‍🔥💕👍👎✊👊🤛🤜👏🙌👐🤲🤝🙏✍️💅💪🦾🦿👂🦻👃🫱🫵👍👎✊👊🤛🤜👋👉👈👆👇☝️🫵👍👎✊👊🤛🤜👋🤚🪑🛏️🛋️🚽🪠🚿🛁🪤�🪒🧴🧷🧺🧻🪣🧼🧽🧯🛒💳💎⚖️🪜🔧🔩⚙️🧲⛓️🧪🧫🧬🔬🔭📡💉💊🩸🩹🩺🪞🪘🍳🫕🥘🍳🍷🍻🥂🍸🍹🧉🍻🥃🍸🍱🪘🍟🍔🍳🪘🪠🪇🔔🪇🔔🪘🎂🍰👑🪄🎩🧙👩‍🦰👩‍🦱👩‍🍳👩‍💼👩‍🔬👩‍💻👩‍🎨👩‍✈️👩‍🚀👩‍⚖️🤶🎅🧙🧝🧛🧟‍♂️🧟‍♀️🧞‍♂️🧞‍♀️🧟‍♂️🧜‍♂️🧜‍♀️🧟‍♀️🧞‍♂️🧞‍♀️🧟👨‍🦰👨‍🦱👩‍🦱👨‍🦲👩‍🦳👨‍🦱🪑🚪🛗🔧🔩⚙️🧲⛓️🧪🧫🧬🔬🔭📡💉💊🩸🩹🩺🪞🪘🍺🍻🥂🍸🍹🧉🍻🥃🍸🍩🍳🪘🍌🫕🍳';
-sec.innerHTML='<div class="modal-section-label">'+t('comments_title')+'</div><div class="comments-list" id="commentsList">'+listHtml+'</div><div class="comment-input-wrap"><textarea class="comment-input" id="commentInput" placeholder="'+t('comment_placeholder')+'" rows="1"></textarea><button class="emoji-btn" onclick="toggleEmojiPicker()" type="button"><i class="fa-regular fa-face-smile"></i></button><div class="emoji-picker" id="emojiPicker"><div class="emoji-grid" id="emojiGrid"></div></div><button class="comment-send" onclick="postComment('+i+')" type="button"><i class="fa-solid fa-paper-plane"></i></button></div>';var eg=document.getElementById('emojiGrid'),ea=emojis.match(/./gu)||[],egHtml='';for(var e=0;e<ea.length;e++)egHtml+='<span onclick="insertEmoji(\''+ea[e]+'\')">'+ea[e]+'</span>';eg.innerHTML=egHtml;}
+    /* Author avatar */
+    var authorPhoto = r.author ? getUserPhoto(r.author) : '';
+    var avatarEl = document.getElementById('modalAvatar');
+    if (authorPhoto) { avatarEl.innerHTML = '<img src="' + authorPhoto + '">'; }
+    else { avatarEl.innerHTML = getCatEmoji(r.category); }
 
-function escHtml(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
-function timeAgo(ts){var s=Math.floor((Date.now()-ts)/1000);if(s<60)return'just now';if(s<3600)return Math.floor(s/60)+'m ago';if(s<86400)return Math.floor(s/3600)+'h ago';if(s<604800)return Math.floor(s/86400)+'d ago';return new Date(ts).toLocaleDateString();}
-function toggleEmojiPicker(){document.getElementById('emojiPicker').classList.toggle('show');}
-function insertEmoji(em){var inp=document.getElementById('commentInput');inp.value+=em;inp.focus();}
-function postComment(i){var inp=document.getElementById('commentInput'),text=inp.value.trim();if(!text||!currentUser)return;var r=recipes[i];if(!r.comments)r.comments=[];r.comments.unshift({name:currentUser,text:text,time:Date.now(),userId:currentUser});save();renderComments(i);inp.value='';document.getElementById('emojiPicker').classList.remove('show');render();}
-function closeView(e){if(e.target===e.currentTarget)closeViewForce();}
-function closeViewForce(){document.getElementById('viewModal').classList.remove('show');document.body.style.overflow='';viewingIndex=-1;}
-function toggleFav(i){recipes[i].fav=!recipes[i].fav;save();render();var btn=document.querySelector('.modal-action-btn:first-child'),icon=btn.querySelector('i');if(recipes[i].fav){btn.classList.add('liked');icon.className='fa-solid fa-heart';showToast(t('added_fav'));}else{btn.classList.remove('liked');icon.className='fa-regular fa-heart';showToast(t('removed_fav'));}}
-function deleteRecipe(i){if(!confirm(t('confirm_delete')))return;recipes.splice(i,1);save();closeViewForce();render();showToast(t('deleted'));}
-function openAdd(){document.getElementById('editIndex').value='';document.getElementById('addForm').reset();document.getElementById('imgPreview').style.display='none';document.getElementById('fAuthor').value=currentUser||'';document.getElementById('submitBtn').textContent=t('save_recipe');document.getElementById('addModal').classList.add('show');document.body.style.overflow='hidden';setTimeout(function(){document.getElementById('fTitle').focus();},350);}
-function editRecipe(i){closeViewForce();var r=recipes[i];document.getElementById('editIndex').value=i;document.getElementById('fTitle').value=r.title;document.getElementById('fCategory').value=r.category;document.getElementById('fIngredients').value=r.ingredients.join('\n');document.getElementById('fInstructions').value=r.instructions.join('\n');document.getElementById('fAuthor').value=r.author||'';if(r.image){document.getElementById('imgPreview').src=r.image;document.getElementById('imgPreview').style.display='block';}else{document.getElementById('imgPreview').style.display='none';}document.getElementById('submitBtn').textContent=t('update_recipe');document.getElementById('addModal').classList.add('show');document.body.style.overflow='hidden';}
-function closeAdd(e){if(e.target===e.currentTarget)closeAddForce();}
-function closeAddForce(){document.getElementById('addModal').classList.remove('show');document.body.style.overflow='';}
-function previewImage(input){var prev=document.getElementById('imgPreview');if(input.files&&input.files[0]){var reader=new FileReader();reader.onload=function(e){prev.src=e.target.result;prev.style.display='block';};reader.readAsDataURL(input.files[0]);}}
-function saveRecipe(e){e.preventDefault();var idx=document.getElementById('editIndex').value,fi=document.getElementById('fImage'),file=fi.files[0],prev=document.getElementById('imgPreview');var finish=function(img){var ir=document.getElementById('fIngredients').value.split('\n'),jr=document.getElementById('fInstructions').value.split('\n'),ci=[],cj=[];for(var a=0;a<ir.length;a++){var v=ir[a].trim();if(v)ci.push(v);}for(var b=0;b<jr.length;b++){var w=jr[b].trim();if(w)cj.push(w);}var data={title:document.getElementById('fTitle').value.trim(),category:document.getElementById('fCategory').value,ingredients:ci,instructions:cj,image:img||'',author:currentUser||'Guest',ownerId:idx!==''?(recipes[parseInt(idx)].ownerId||''):currentUser,views:idx!==''?(recipes[parseInt(idx)].views||0):0,likes:idx!==''?(recipes[parseInt(idx)].likes||0):0,fav:idx!==''?recipes[parseInt(idx)].fav:false,comments:idx!==''?(recipes[parseInt(idx)].comments||[]):[]};if(idx===''){recipes.push(data);showToast(t('saved_msg'));}else{recipes[parseInt(idx)]=data;showToast(t('updated_msg'));}if(currentLang==='sw'){delete translationCache[data.title.toLowerCase()];try{localStorage.setItem('ndesanjo_translations',JSON.stringify(translationCache));}catch(e){}translateAllTexts().then(function(){render();});}save();closeAddForce();render();};if(file){var reader=new FileReader();reader.onload=function(ev){finish(ev.target.result);};reader.readAsDataURL(file);}else{var ex=idx!==''?recipes[parseInt(idx)].image:'';var ps=(prev.style.display!=='none')?prev.src:'';finish(ps||ex);}}
+    document.getElementById('modalCat').textContent = txCat(r.category);
+    document.getElementById('modalUser').textContent = r.author ? getUserDisplayName(r.author) : t('ndesanjo_family');
 
-function toggleDark(){document.body.classList.toggle('dark');var d=document.body.classList.contains('dark');document.getElementById('darkBtn').innerHTML=d?'<i class="fa-solid fa-sun"></i>':'<i class="fa-solid fa-moon"></i>';try{localStorage.setItem('ndesanjo_dark',d);}catch(e){}}
-if(localStorage.getItem('ndesanjo_dark')==='true'){document.body.classList.add('dark');document.getElementById('darkBtn').innerHTML='<i class="fa-solid fa-sun"></i>';}
+    /* Gallery */
+    var imgs = getAllImages(r);
+    renderModalGallery(imgs, 0);
 
-var toastTimer=null;
-function showToast(msg){var el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(function(){el.classList.remove('show');},2200);}
-document.addEventListener('keydown',function(e){if(e.key==='Escape'){if(document.getElementById('addModal').classList.contains('show'))closeAddForce();else if(document.getElementById('viewModal').classList.contains('show'))closeViewForce();}});
-document.addEventListener('touchstart',function(e){var it=e.target.closest('.grid-item');if(it)it.classList.add('touched');},{passive:true});
-document.addEventListener('touchend',function(){var its=document.querySelectorAll('.grid-item.touched');for(var i=0;i<its.length;i++)its[i].classList.remove('touched');},{passive:true});
-document.addEventListener('click',function(e){if(!e.target.closest('.emoji-picker')&&!e.target.closest('.emoji-btn')){var ep=document.getElementById('emojiPicker');if(ep)ep.classList.remove('show');}});
+    var ih = ''; for (var ii = 0; ii < r.ingredients.length; ii++) ih += '<li><span class="ing-dot"></span>' + tx(r.ingredients[ii]) + '</li>';
+    var jh = ''; for (var ij = 0; ij < r.instructions.length; ij++) jh += '<li>' + tx(r.instructions[ij]) + '</li>';
+    document.getElementById('modalBody').innerHTML = '<div class="modal-title">' + tx(r.title) + '</div><div class="modal-section-label">' + t('ingredients_title') + '</div><ul class="modal-ingredients">' + ih + '</ul><div class="modal-section-label">' + t('instructions_title') + '</div><ol class="modal-instructions">' + jh + '</ol>';
+    document.getElementById('modalStats').innerHTML = '<span><i class="fa-solid fa-eye"></i> ' + formatNum(r.views) + ' ' + t('views') + '</span><span><i class="fa-solid fa-heart"></i> ' + formatNum(r.likes || 0) + ' ' + t('likes') + '</span><span><i class="fa-solid fa-comment"></i> ' + formatNum((r.comments || []).length) + ' ' + t('comments_count') + '</span>';
+    var isOwner = r.ownerId && r.ownerId === currentUser, isAdm = isAdminUser();
+    var hc = r.fav ? ' liked' : '', hi = r.fav ? 'fa-solid' : 'fa-regular';
+    var fh = '<button class="modal-action-btn' + hc + '" onclick="toggleFav(' + i + ')" aria-label="Favorite"><i class="' + hi + ' fa-heart"></i></button>';
+    fh += '<button class="modal-action-btn modal-share-btn" onclick="openShareBar(' + i + ')" aria-label="Share"><i class="fa-solid fa-share-nodes"></i></button>';
+    if (isOwner || isAdm) fh += '<button class="modal-action-btn" onclick="editRecipe(' + i + ')" aria-label="Edit"><i class="fa-regular fa-pen-to-square"></i></button><span class="modal-action-spacer"></span><button class="modal-action-btn delete-btn" onclick="deleteRecipe(' + i + ')" aria-label="Delete"><i class="fa-regular fa-trash-can"></i></button>';
+    else fh += '<span class="modal-action-spacer"></span>';
+    document.getElementById('modalFooter').innerHTML = fh;
+    renderComments(i);
+    document.getElementById('viewModal').classList.add('show'); document.body.style.overflow = 'hidden';
+}
 
-function seedData(){recipes=[{title:"Mandazi with Chai",category:"Breakfast",ingredients:["3 cups all-purpose flour","1/2 cup sugar","1 tsp cardamom","2 eggs","1/2 cup warm milk","Oil for frying"],instructions:["Mix flour, sugar, and cardamom in a large bowl","Beat eggs and add to the dry mixture","Gradually add warm milk and knead into soft dough","Let rest for 30 minutes covered","Roll out and cut into triangles","Deep fry in hot oil until golden brown","Serve with hot spiced chai"],image:"https://picsum.photos/seed/mandazi22/600/600.jpg",author:"000Ndesanjo",ownerId:"000Ndesanjo",views:47,likes:12,fav:true,comments:[{name:"Amina",text:"My family loves this! 😍",time:Date.now()-3600000,userId:"amina"},{name:"Juma",text:"Best mandazi recipe I've tried",time:Date.now()-86400000,userId:"juma"}]},{title:"Ugali wa Mahindi",category:"Dinner",ingredients:["2 cups maize flour","3 cups water","Pinch of salt"],instructions:["Bring water to a boil in a heavy saucepan","Slowly add maize flour while stirring with a wooden spoon","Reduce heat and continue stirring firmly","The mixture will thicken and pull away from sides","Cover and let cook for 2 minutes","Serve hot with sukuma wiki or nyama choma"],image:"https://picsum.photos/seed/ugali44/600/600.jpg",author:"000Ndesanjo",ownerId:"000Ndesanjo",views:89,likes:23,fav:false,comments:[{name:"Peter",text:"Cannot eat anything without ugali 😂",time:Date.now()-7200000,userId:"peter"}]},{title:"Sukuma Wiki",category:"Lunch",ingredients:["1 bunch collard greens","1 onion diced","2 tomatoes chopped","1 tbsp oil","Salt to taste","1/2 tsp turmeric"],instructions:["Wash and chop collard greens into thin strips","Heat oil in a pan and saut\u00e9 onion until golden","Add tomatoes and cook until soft","Add sukuma wiki and turmeric","Cover and cook for 5-7 minutes until tender","Season with salt and serve with ugali"],image:"https://picsum.photos/seed/sukuma55/600/600.jpg",author:"000Ndesanjo",ownerId:"000Ndesanjo",views:34,likes:8,fav:true,comments:[]},{title:"Nyama Choma",category:"Dinner",ingredients:["1 kg goat meat","Salt","Lemon juice","2 cloves garlic minced","1 tsp black pepper","Charcoal for grilling"],instructions:["Cut goat meat into generous chunks","Mix salt, lemon juice, garlic, and pepper","Marinate meat for at least 2 hours","Prepare charcoal grill on medium-high heat","Grill meat turning occasionally for 20-30 minutes","Serve with kachumbari and ugali"],image:"https://picsum.photos/seed/nyama66/600/600.jpg",author:"000Ndesanjo",ownerId:"000Ndesanjo",views:156,likes:45,fav:false,comments:[{name:"David",text:"Nyama choma is life! 🔥🥩",time:Date.now()-1800000,userId:"david"}]},{title:"Kachumbari Salad",category:"Lunch",ingredients:["3 large tomatoes diced","1 red onion thinly sliced","1 cucumber diced","Fresh coriander chopped","Lemon juice","Salt and chili to taste"],instructions:["Dice tomatoes and cucumber into small even pieces","Thinly slice red onion into half-moons","Soak onion in cold water for 5 minutes","Drain onion and combine all vegetables","Squeeze lemon juice over the salad","Add coriander, salt, and chili then toss gently"],image:"https://picsum.photos/seed/kachumbari77/600/600.jpg",author:"000Ndesanjo",ownerId:"000Ndesanjo",views:22,likes:5,fav:false,comments:[]},{title:"Sweet Banana Cake",category:"Dessert",ingredients:["4 ripe bananas","2 cups flour","1 cup sugar","2 eggs","1/2 cup melted butter","1 tsp baking soda","1 tsp vanilla essence"],instructions:["Preheat oven to 175\u00b0C","Mash bananas thoroughly in a large bowl","Add sugar, eggs, and melted butter then mix well","Sift in flour and baking soda","Add vanilla essence and fold until just combined","Pour into a greased loaf tin","Bake for 50-55 minutes until a skewer comes out clean"],image:"https://picsum.photos/seed/banana88/600/600.jpg",author:"000Ndesanjo",ownerId:"000Ndesanjo",views:63,likes:19,fav:true,comments:[{name:"Fatima",text:"Kids absolutely love this cake 🎂",time:date.now()-5400000,userId:"fatima"}]}];save();}
+/* ===== SHARING ===== */
+function openShareBar(i) { shareRecipeIndex = i; document.getElementById('shareBar').classList.add('show'); }
+function closeShareBar() { document.getElementById('shareBar').classList.remove('show'); shareRecipeIndex = -1; }
+function getShareText(i) {
+    var r = recipes[i]; if (!r) return '';
+    return t('share_text') + ' ' + r.title + ' (' + txCat(r.category) + ')';
+}
+function shareWhatsApp() {
+    var text = encodeURIComponent(getShareText(shareRecipeIndex));
+    window.open('https://wa.me/?text=' + text, '_blank');
+    closeShareBar();
+}
+function shareTwitter() {
+    var text = encodeURIComponent(getShareText(shareRecipeIndex));
+    window.open('https://twitter.com/intent/tweet?text=' + text, '_blank');
+    closeShareBar();
+}
+function shareFacebook() {
+    var text = encodeURIComponent(getShareText(shareRecipeIndex));
+    window.open('https://www.facebook.com/sharer/sharer.php?quote=' + text, '_blank');
+    closeShareBar();
+}
+function copyRecipeLink() {
+    var r = recipes[shareRecipeIndex];
+    var data = { t: r.title, c: r.category, i: r.ingredients, s: r.instructions, a: r.author };
+    var encoded = btoa(unescape(encodeURIComponent(JSON.stringify(data))));
+    var url = window.location.origin + window.location.pathname + '#recipe=' + encoded;
+    if (navigator.clipboard) { navigator.clipboard.writeText(url).then(function() { showToast(t('link_copied')); }); }
+    else {
+        var ta = document.createElement('textarea'); ta.value = url; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); showToast(t('link_copied'));
+    }
+    closeShareBar();
+}
 
-if(recipes.length===0)seedData();
-document.getElementById('langLabel').textContent=currentLang==='en'?'SW':'EN';
-if(localStorage.getItem('ndesanjo_dark')==='true'){document.body.classList.add('dark');document.getElementById('darkBtn').innerHTML='<i class="fa-solid fa-sun"></i>';}
-if(checkSession()){enterApp();}
+/* Check for shared recipe on load */
+function checkSharedRecipe() {
+    var hash = window.location.hash;
+    if (hash.indexOf('#recipe=') === 0) {
+        try {
+            var encoded = hash.substring(8);
+            var json = decodeURIComponent(escape(atob(encoded)));
+            var data = JSON.parse(json);
+            /* Add as a new recipe if not duplicate */
+            var exists = false;
+            for (var i = 0; i < recipes.length; i++) { if (recipes[i].title === data.t && recipes[i].author === data.a) { exists = true; openView(i); break; } }
+            if (!exists) {
+                recipes.push({ title: data.t, category: data.c || 'Dinner', ingredients: data.i || [], instructions: data.s || [], image: '', images: [], author: data.a || 'Shared', ownerId: currentUser || '', views: 0, likes: 0, fav: false, comments: [] });
+                save(); render();
+                openView(recipes.length - 1);
+            }
+            history.replaceState(null, '', window.location.pathname);
+        } catch(e) {}
+    }
+}
+
+/* ===== COMMENTS ===== */
+var EMOJI_LIST = ['\u{1F600}','\u{1F603}','\u{1F604}','\u{1F601}','\u{1F606}','\u{1F605}','\u{1F923}','\u{1F602}','\u{1F642}','\u{1F609}','\u{1F60A}','\u{1F607}','\u{1F970}','\u{1F60D}','\u{1F929}','\u{1F618}','\u{1F617}','\u{1F61A}','\u{1F619}','\u{1F972}','\u{1F60B}','\u{1F61B}','\u{1F61C}','\u{1F92A}','\u{1F61D}','\u{1F911}','\u{1F917}','\u{1F92D}','\u{1F92B}','\u{1F914}','\u{1F910}','\u{1F928}','\u{1F610}','\u{1F611}','\u{1F636}','\u{1F60F}','\u{1F612}','\u{1F644}','\u{1F62C}','\u{1F60C}','\u{1F614}','\u{1F62A}','\u{1F924}','\u{1F634}','\u{1F637}','\u{1F912}','\u{1F915}','\u{1F922}','\u{1F92E}','\u{1F927}','\u{1F975}','\u{1F976}','\u{1F973}','\u{1F60E}','\u{1F913}','\u{1F9D0}','\u{1F615}','\u{1F61F}','\u{1F641}','\u{2639}\uFE0F','\u{1F62E}','\u{1F62F}','\u{1F633}','\u{1F63F}','\u{1F626}','\u{1F627}','\u{1F628}','\u{1F630}','\u{1F625}','\u{1F622}','\u{1F62D}','\u{1F631}','\u{1F616}','\u{1F623}','\u{1F61E}','\u{1F613}','\u{1F629}','\u{1F62B}','\u{1F971}','\u{1F624}','\u{1F621}','\u{1F620}','\u{1F92C}','\u{1F44D}','\u{1F44E}','\u{1F44F}','\u{1F64C}','\u{1F91D}','\u{1F64F}','\u{270D}\uFE0F','\u{1F4AA}','\u{1F525}','\u2764\uFE0F','\u{1F495}','\u{1F496}','\u{1F497}','\u{1F494}','\u{1F4AF}','\u{2728}','\u{1F389}','\u{1F38A}','\u{1F31F}','\u{2B50}','\u{1F373}','\u{1F370}','\u{1F381}','\u{1F36B}','\u{2615}','\u{1F377}','\u{1F37A}'];
+
+function renderComments(i) {
+    var r = recipes[i]; if (!r) return; if (!r.comments) r.comments = [];
+    var sec = document.getElementById('commentsSection'), listHtml = '';
+    if (r.comments.length === 0) { listHtml = '<div class="no-comments">' + t('comment_placeholder') + '</div>'; }
+    else { for (var c = 0; c < r.comments.length; c++) { var cm = r.comments[c]; var cmPhoto = cm.userId ? getUserPhoto(cm.userId) : ''; var avInner = cmPhoto ? '<img src="' + cmPhoto + '">' : escHtml(cm.name ? cm.name.charAt(0).toUpperCase() : '?'); listHtml += '<div class="comment-item" style="animation-delay:' + (c * 0.05) + 's"><div class="comment-avatar">' + avInner + '</div><div class="comment-body"><div class="comment-name">' + escHtml(cm.name) + '</div><div class="comment-text">' + escHtml(cm.text) + '</div><div class="comment-time">' + timeAgo(cm.time) + '</div></div></div>'; } }
+    var egHtml = '';
+    for (var e = 0; e < EMOJI_LIST.length; e++) egHtml += '<span onclick="insertEmoji(\'' + EMOJI_LIST[e].replace(/'/g, "\\'") + '\')">' + EMOJI_LIST[e] + '</span>';
+    sec.innerHTML = '<div class="modal-section-label">' + t('comments_title') + '</div><div class="comments-list" id="commentsList">' + listHtml + '</div><div class="comment-input-wrap"><textarea class="comment-input" id="commentInput" placeholder="' + t('comment_placeholder') + '"></textarea><button class="emoji-btn" onclick="toggleEmojiPicker()" type="button"><i class="fa-regular fa-face-smile"></i></button><div class="emoji-picker" id="emojiPicker"><div class="emoji-grid" id="emojiGrid">' + egHtml + '</div></div><button class="comment-send" onclick="postComment(' + i + ')" type="button"><i class="fa-solid fa-paper-plane"></i></button></div>';
+}
+function toggleEmojiPicker() { document.getElementById('emojiPicker').classList.toggle('show'); }
+function insertEmoji(em) { var inp = document.getElementById('commentInput'); inp.value += em; inp.focus(); }
+function postComment(i) { var inp = document.getElementById('commentInput'), text = inp.value.trim(); if (!text || !currentUser) return; var r = recipes[i]; if (!r.comments) r.comments = []; r.comments.unshift({ name: getUserDisplayName(currentUser), text: text, time: Date.now(), userId: currentUser }); save(); renderComments(i); inp.value = ''; }
+function closeView(e) { if (e.target === e.currentTarget) closeViewForce(); }
+function closeViewForce() { closeShareBar(); document.getElementById('viewModal').classList.remove('show'); document.body.style.overflow = ''; viewingIndex = -1; }
+function toggleFav(i) { recipes[i].fav = !recipes[i].fav; save(); render(); var btn = document.querySelector('.modal-action-btn:first-child'), icon = btn.querySelector('i'); if (recipes[i].fav) { btn.classList.add('liked'); icon.className = 'fa-solid fa-heart'; showToast(t('added_fav')); } else { btn.classList.remove('liked'); icon.className = 'fa-regular fa-heart'; showToast(t('removed_fav')); } }
+function deleteRecipe(i) { if (!confirm(t('confirm_delete'))) return; recipes.splice(i, 1); save(); closeViewForce(); render(); showToast(t('deleted')); }
+
+/* ===== ADD/EDIT RECIPE ===== */
+function openAdd() {
+    document.getElementById('editIndex').value = ''; document.getElementById('addForm').reset();
+    tempGalleryImages = []; renderGalleryThumbs();
+    document.getElementById('fAuthor').value = currentUser || '';
+    updateUIStrings(); document.getElementById('addModal').classList.add('show'); document.body.style.overflow = 'hidden';
+    setTimeout(function() { document.getElementById('fTitle').focus(); }, 350);
+}
+function editRecipe(i) {
+    closeViewForce(); var r = recipes[i];
+    document.getElementById('editIndex').value = i; document.getElementById('fTitle').value = r.title;
+    document.getElementById('fCategory').value = r.category;
+    document.getElementById('fIngredients').value = r.ingredients.join('\n');
+    document.getElementById('fInstructions').value = r.instructions.join('\n');
+    document.getElementById('fAuthor').value = r.author || '';
+    /* Load gallery */
+    tempGalleryImages = [];
+    if (r.images && r.images.length > 0) { for (var x = 0; x < r.images.length; x++) tempGalleryImages.push(r.images[x]); }
+    else if (r.image) { tempGalleryImages.push(r.image); }
+    renderGalleryThumbs();
+    updateUIStrings(); document.getElementById('submitBtn').textContent = t('update_recipe');
+    document.getElementById('addModal').classList.add('show'); document.body.style.overflow = 'hidden';
+}
+function closeAdd(e) { if (e.target === e.currentTarget) closeAddForce(); }
+function closeAddForce() { document.getElementById('addModal').classList.remove('show'); document.body.style.overflow = ''; }
+
+function previewGalleryImages(input) {
+    if (!input.files) return;
+    for (var i = 0; i < input.files.length; i++) {
+        (function(file) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                compressImage(e.target.result, 800, 0.75, function(dataUrl) {
+                    tempGalleryImages.push(dataUrl);
+                    renderGalleryThumbs();
+                });
+            };
+            reader.readAsDataURL(file);
+        })(input.files[i]);
+    }
+    input.value = '';
+}
+
+function renderGalleryThumbs() {
+    var area = document.getElementById('galleryUploadArea');
+    var html = '<div class="gallery-upload-btn" onclick="document.getElementById(\'fImages\').click()"><i class="fa-solid fa-camera"></i><span>Add</span></div>';
+    for (var i = 0; i < tempGalleryImages.length; i++) {
+        var isPrimary = i === 0;
+        html += '<div class="gallery-thumb-wrap" style="animation-delay:' + (i * 0.06) + 's">'
+            + '<img src="' + tempGalleryImages[i] + '">'
+            + (isPrimary ? '<div class="gallery-thumb-primary">MAIN</div>' : '')
+            + '<button type="button" class="gallery-thumb-remove" onclick="removeGalleryImage(' + i + ')"><i class="fa-solid fa-xmark"></i></button>'
+            + '</div>';
+    }
+    area.innerHTML = html;
+}
+
+function removeGalleryImage(idx) {
+    tempGalleryImages.splice(idx, 1);
+    renderGalleryThumbs();
+}
+
+function saveRecipe(e) {
+    e.preventDefault(); var idx = document.getElementById('editIndex').value;
+    var finish = function() {
+        var ir = document.getElementById('fIngredients').value.split('\n'), jr = document.getElementById('fInstructions').value.split('\n'), ci = [], cj = [];
+        for (var a = 0; a < ir.length; a++) { var v = ir[a].trim(); if (v) ci.push(v); }
+        for (var b = 0; b < jr.length; b++) { var w = jr[b].trim(); if (w) cj.push(w); }
+        var data = {
+            title: document.getElementById('fTitle').value.trim(),
+            category: document.getElementById('fCategory').value,
+            ingredients: ci, instructions: cj,
+            images: tempGalleryImages.slice(),
+            image: tempGalleryImages.length > 0 ? tempGalleryImages[0] : '',
+            author: currentUser || 'Guest',
+            ownerId: idx !== '' ? (recipes[parseInt(idx)].ownerId || '') : currentUser,
+            views: idx !== '' ? (recipes[parseInt(idx)].views || 0) : 0,
+            likes: idx !== '' ? (recipes[parseInt(idx)].likes || 0) : 0,
+            fav: idx !== '' ? recipes[parseInt(idx)].fav : false,
+            comments: idx !== '' ? (recipes[parseInt(idx)].comments || []) : []
+        };
+        if (idx === '') { recipes.push(data); showToast(t('saved_msg')); } else { recipes[parseInt(idx)] = data; showToast(t('updated_msg')); }
+        if (currentLang === 'sw') { delete translationCache[data.title.toLowerCase()]; try { localStorage.setItem('ndesanjo_translations', JSON.stringify(translationCache)); } catch(e) {} translateAllTexts().then(function() { render(); }); }
+        save(); closeAddForce(); render();
+    };
+    finish();
+}
+
+function toggleDark() { document.body.classList.toggle('dark'); var d = document.body.classList.contains('dark'); document.getElementById('darkBtn').innerHTML = d ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>'; try { localStorage.setItem('ndesanjo_dark', d); } catch(e) {} }
+if (localStorage.getItem('ndesanjo_dark') === 'true') { document.body.classList.add('dark'); document.getElementById('darkBtn').innerHTML = '<i class="fa-solid fa-sun"></i>'; }
+
+var toastTimer = null;
+function showToast(msg) { var el = document.getElementById('toast'); el.textContent = msg; el.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(function() { el.classList.remove('show'); }, 2200); }
+
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        if (document.getElementById('shareBar').classList.contains('show')) closeShareBar();
+        else if (document.getElementById('addModal').classList.contains('show')) closeAddForce();
+        else if (document.getElementById('viewModal').classList.contains('show')) closeViewForce();
+        else if (document.getElementById('profileBackdrop').classList.contains('show')) closeProfileForce();
+        else if (document.getElementById('adminBackdrop').classList.contains('show')) closeAdminForce();
+    }
+});
+document.addEventListener('touchstart', function(e) { var it = e.target.closest('.grid-item'); if (it) it.classList.add('touched'); }, { passive: true });
+document.addEventListener('touchend', function() { var its = document.querySelectorAll('.grid-item.touched'); for (var i = 0; i < its.length; i++) its[i].classList.remove('touched'); }, { passive: true });
+document.addEventListener('click', function(e) {
+    if (!e.target.closest('.emoji-picker') && !e.target.closest('.emoji-btn')) { var ep = document.getElementById('emojiPicker'); if (ep) ep.classList.remove('show'); }
+    if (!e.target.closest('.share-bar') && !e.target.closest('.modal-share-btn')) closeShareBar();
+});
+
+function seedData() {
+    recipes = [
+        { title:"Mandazi with Chai", category:"Breakfast", ingredients:["3 cups all-purpose flour","1/2 cup sugar","1 tsp cardamom","2 eggs","1/2 cup warm milk","Oil for frying"], instructions:["Mix flour, sugar, and cardamom in a large bowl","Beat eggs and add to the dry mixture","Gradually add warm milk and knead into soft dough","Let rest for 30 minutes covered","Roll out and cut into triangles","Deep fry in hot oil until golden brown","Serve with hot spiced chai"], image:"https://picsum.photos/seed/mandazi22/600/600.jpg", images:["https://picsum.photos/seed/mandazi22/600/600.jpg","https://picsum.photos/seed/mandazi-side/600/600.jpg","https://picsum.photos/seed/mandazi-top/600/600.jpg"], author:"000Ndesanjo", ownerId:"000Ndesanjo", views:47, likes:12, fav:true, comments:[{name:"Amina",text:"My family loves this!",time:Date.now()-3600000,userId:"amina"},{name:"Juma",text:"Best mandazi recipe I have tried",time:Date.now()-86400000,userId:"juma"}] },
+        { title:"Ugali wa Mahindi", category:"Dinner", ingredients:["2 cups maize flour","3 cups water","Pinch of salt"], instructions:["Bring water to a boil in a heavy saucepan","Slowly add maize flour while stirring with a wooden spoon","Reduce heat and continue stirring firmly","The mixture will thicken and pull away from sides","Cover and let cook for 2 minutes","Serve hot with sukuma wiki or nyama choma"], image:"https://picsum.photos/seed/ugali44/600/600.jpg", images:["https://picsum.photos/seed/ugali44/600/600.jpg","https://picsum.photos/seed/ugali-plate/600/600.jpg"], author:"000Ndesanjo", ownerId:"000Ndesanjo", views:89, likes:23, fav:false, comments:[{name:"Peter",text:"Cannot eat anything without ugali",time:Date.now()-7200000,userId:"peter"}] },
+        { title:"Sukuma Wiki", category:"Lunch", ingredients:["1 bunch collard greens","1 onion diced","2 tomatoes chopped","1 tbsp oil","Salt to taste","1/2 tsp turmeric"], instructions:["Wash and chop collard greens into thin strips","Heat oil in a pan and saute onion until golden","Add tomatoes and cook until soft","Add sukuma wiki and turmeric","Cover and cook for 5-7 minutes until tender","Season with salt and serve with ugali"], image:"https://picsum.photos/seed/sukuma55/600/600.jpg", images:["https://picsum.photos/seed/sukuma55/600/600.jpg"], author:"000Ndesanjo", ownerId:"000Ndesanjo", views:34, likes:8, fav:true, comments:[] },
+        { title:"Nyama Choma", category:"Dinner", ingredients:["1 kg goat meat","Salt","Lemon juice","2 cloves garlic minced","1 tsp black pepper","Charcoal for grilling"], instructions:["Cut goat meat into generous chunks","Mix salt, lemon juice, garlic, and pepper","Marinate meat for at least 2 hours","Prepare charcoal grill on medium-high heat","Grill meat turning occasionally for 20-30 minutes","Serve with kachumbari and ugali"], image:"https://picsum.photos/seed/nyama66/600/600.jpg", images:["https://picsum.photos/seed/nyama66/600/600.jpg","https://picsum.photos/seed/nyama-grill/600/600.jpg","https://picsum.photos/seed/nyama-serve/600/600.jpg","https://picsum.photos/seed/nyama-close/600/600.jpg"], author:"000Ndesanjo", ownerId:"000Ndesanjo", views:156, likes:45, fav:false, comments:[{name:"David",text:"Nyama choma is life!",time:Date.now()-1800000,userId:"david"}] },
+        { title:"Kachumbari Salad", category:"Lunch", ingredients:["3 large tomatoes diced","1 red onion thinly sliced","1 cucumber diced","Fresh coriander chopped","Lemon juice","Salt and chili to taste"], instructions:["Dice tomatoes and cucumber into small even pieces","Thinly slice red onion into half-moons","Soak onion in cold water for 5 minutes","Drain onion and combine all vegetables","Squeeze lemon juice over the salad","Add coriander, salt, and chili then toss gently"], image:"https://picsum.photos/seed/kachumbari77/600/600.jpg", images:["https://picsum.photos/seed/kachumbari77/600/600.jpg"], author:"000Ndesanjo", ownerId:"000Ndesanjo", views:22, likes:5, fav:false, comments:[] },
+        { title:"Sweet Banana Cake", category:"Dessert", ingredients:["4 ripe bananas","2 cups flour","1 cup sugar","2 eggs","1/2 cup melted butter","1 tsp baking soda","1 tsp vanilla essence"], instructions:["Preheat oven to 175 degrees Celsius","Mash bananas thoroughly in a large bowl","Add sugar, eggs, and melted butter then mix well","Sift in flour and baking soda","Add vanilla essence and fold until just combined","Pour into a greased loaf tin","Bake for 50-55 minutes until a skewer comes out clean"], image:"https://picsum.photos/seed/banana88/600/600.jpg", images:["https://picsum.photos/seed/banana88/600/600.jpg","https://picsum.photos/seed/banana-slice/600/600.jpg","https://picsum.photos/seed/banana-whole/600/600.jpg"], author:"000Ndesanjo", ownerId:"000Ndesanjo", views:63, likes:19, fav:true, comments:[{name:"Fatima",text:"Kids absolutely love this cake",time:Date.now()-5400000,userId:"fatima"}] }
+    ];
+    save();
+}
+
+/* ===== INIT ===== */
+if (recipes.length === 0) seedData();
+document.getElementById('langLabel').textContent = currentLang === 'en' ? 'SW' : 'EN';
+if (localStorage.getItem('ndesanjo_dark') === 'true') { document.body.classList.add('dark'); document.getElementById('darkBtn').innerHTML = '<i class="fa-solid fa-sun"></i>'; }
+
+(function() {
+    try {
+        var session = JSON.parse(localStorage.getItem('ndesanjo_session'));
+        if (session && session.name) { currentUser = session.name; enterApp(); }
+    } catch(e) { try { localStorage.removeItem('ndesanjo_session'); } catch(e2) {} }
+})();
 updateVisitorCount();
+setTimeout(checkSharedRecipe, 300);
 </script>
-
 </body>
 </html>
